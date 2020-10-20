@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Nanum+Brush+Script&display=swap" rel="stylesheet">     <!--흐물거리는 폰트, 귀여운폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">        <!--동글네모난 폰트-->
+
+    <script src="js/move.js"></script>
+    <style>
+    *{
+    font-family: 'BBTreeGB';     /*흐물폰트*/
+    font-size: 30px;
+}
+
+        ul{
+            font-size: 20px
+    }
+        .li{
+            list-style: none;
+            font-size: 20px
+        }
+        a{
+            color: black;
+        }
+        .item{
+            text-align: center;
+        }
+        p{
+            font-family: 'BBTreeGB';
+    margin-top: 5%;
+}
+
+    </style>
+
+</head>
+<body>
+
+    <!-- Header Start -->
+    <div class="header-area">
+        <div class="main-header ">
+            <div class="header-top top-bg d-none d-lg-block">
+                <div class="container-fluid">
+                    <a href="http://localhost:2000/main_1_in"> <img src="img/로고.png" style="margin-top:2%; " ></a> 
+                    <div class="col-xl-12">
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <div class="header-info-right" align="right">
+                                <ul>                                          
+                                    <li><a href="http://localhost:2000/main_1">로그아웃</a></li>
+                                    <li><a href="#">장바구니</a></li>
+                                    <li><a href="http://localhost:2000/customer">고객센터</a></li>
+                                    <li><a href="http://localhost:2000/exchange">환전하기</a></li>
+                                    <li><a href="http://localhost:2000/temp_list">마이페이지</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- header -->
+<div class="container-fluid div_header">
+    <header style="text-align: center;">
+        <div class="text-center" style="width:60%; display: inline-block; margin-left: 10%;">
+            <!-- <a href="http://localhost:2000/main_1_in"> <img src="img/6cbac97c-3c82-4e86-8314-cb85b900a759.png"></a>             -->
+        </div>
+        <a class="text-right" style="float: right; color: black;">반갑습니다 <%=name%>님! 보유 금액: <%=money%> eth </a>
+
+    </header>
+
+
+        <div style="text-align: right; display: inline-block; padding-top: 3%;">
+        </div>
+        <div class="col-lg-12" style="margin-top:1%; height:auto;">
+            <div class="dropdown">      <!--카테고리-->
+                <button type="button" data-toggle="dropdown" id="btn_setting" class="category btn btn-default dropdown-toggle" style="float: left; width: 150px; background-color:  #D7B5EB; margin-left: 17%; margin-top: 5px;">                    
+                    <i class="fas fa-bars"></i>
+                    카테고리<span class="caret"></span></button>
+                    <div class="dropdown-menu"role="menu" style="margin-left: 16.5%; margin-top: 5px; border-radius: 20px; text-align: center; background-color: rgba(255, 255, 255, 0.952);">
+                        <div style="padding-top: 3px;"><i class="fas fa-bars"></i> 카테고리
+                        </div>
+                        
+                        <div class="divider">   
+                        </div>                             
+                            <ul>
+                                여성의류
+                            </ul> 
+                            <ul>
+                                남성의류
+                            </ul>
+                            <ul>
+                                전자기기
+                            </ul>
+                            <ul>
+                                가구
+                            </ul>
+                            <ul>
+                                도서
+                            </ul>
+                            <ul>
+                                스포츠_레저
+                            </ul>
+                    </div>
+                </div>
+
+            <div>
+                <form action="/search_data2" method="get">
+                    <span><input type="text" class="form-control" name="search_data"  placeholder="Search products" style="float: left; width:50%;  margin-left: 2%; margin-top: 10px; border-radius: 30px; padding: 10px 20px; font-weight: 500;">
+                    <button type="submit" class="btn btn-default" style="float: left; background-color: white; margin-top: 5px;"><img src="/img/search.svg" width="30px" height="30px"></button></span>
+                    
+                </form>
+            </div>
+
+       </div>
+
+
+        </div>
+</div>
+    
+    <br>
+    <h1 class="text-center"><i class="fas fa-bullhorn">마이페이지입니다</i></h1>
+    <hr>
+    <br>
+
+        <div class="container-fluid">
+            <!--nav-->
+            <div class="col-sm-2 div_nav" >   <!--윤곽 눈에보이게 각 섹션마다 border넣어논 것.-->
+                <div class="list" style="border: 1px solid; border-radius: 20px; border-color: #506172;">
+                    <ul style="text-align: center;">
+                        <li style="font-size: 30px; color:#506172">
+                            <a><input type="button" id="large_women" onclick="myBtn_1(this.id)" value="여성의류" style="margin-top: 4%; color:  #506172; border: none; background-color: white;"></a>
+                        </li>
+                        <li style="font-size: 30px; color:#506172">
+                            <a><input type="button" id="large_men" onclick="myBtn_1(this.id)" value="남성의류" style="margin-top: 4%; color: #506172; border: none; background-color: white;"></a>
+                        </li>
+                        <li style="font-size: 30px; color: #506172">
+                            <a><input type="button" id="large_elec" onclick="myBtn_1(this.id)" name="menu_3" value="전자기기" style="margin-top: 4%; color:  #506172; border: none; background-color: white;"></a>
+                        </li>
+                        <li style="font-size: 30px; color: #506172">
+                            <a><input type="button" id="large_furniture" onclick="myBtn_1(this.id)" name="menu_4" value="가구" style="margin-top: 4%; color:  #506172; border: none; background-color: white;"></a>
+                        </li>
+                        <li style="font-size: 30px; color:#506172">
+                            <a><input type="button" id="large_books" onclick="myBtn_1(this.id)" name="menu_5" value="도서" style="margin-top: 4%; color:  #506172; border: none; background-color: white;"></a>
+                        </li>
+                        <li style="font-size: 30px; color: #506172">
+                            <a><input type="button" id="large_sports" onclick="myBtn_1(this.id)" name="menu_6" value="스포츠_레저" style="margin-top: 4%; color: #506172; border: none; background-color: white;"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="nav_banner">
+                    <div style="margin-top: 6%;">
+                        <img class="img-responsive" src="/img/side_banner1.png"> 
+                    </div>
+                    <div style="margin-top: 6%;">
+                        <img class="img-responsive" src="/img/side_banner2.png"> 
+                    </div>
+                    <div style="margin-top: 6%;">
+                        <img class="img-responsive" src="/img/side_banner3.png"> 
+                    </div>
+                    <div style="margin-top: 6%;">
+                        <img class="img-responsive" src="/img/side_banner4.png"> 
+                    </div>
+                    </div>
+                
+            </div>
+
+            <div class="col-sm-8">
+                <div>
+                    <table>
+                        <tr rowspan='2'>
+                            <div style="color: #0b1c39;;"><i class="fab fa-angellist"></i>다있따중고의 추천 영상!</div>
+                        </tr>
+                        <tr>
+                            <td><img src="img/mypage1.png" class="img-responsive" style="padding-right: 10px;"></td>
+                            <td><img src="img/mypage2.png" class="img-responsive" style="padding-right: 10px;"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <span><br>임시저장된 글 수: <%= result.length %> </span> <br><br>
+
+                <div style="padding-left:10%; padding-right: 10%;">
+                <table class="table text-center" >
+                    <thead>
+                        <tr>
+                            <th class="item" style="font-size: 20px;">거래번호</th>
+                            <th class="item" style="font-size: 20px;">제목</th>
+                        </tr>
+                    </thead>
+                    <!-- <tbody> -->
+                        <% for(var element of result){ %>       <!--element하나만 있을 땐 entries 안써......-->
+                            
+                            <tr >
+                                <td scope="row" class="item" style="font-size: 20px;"><%=element.trans_num%></td>
+                                <td >
+                                    <a href="http://localhost:2000/temp_detail?tar=<%=element.trans_num%>" style="font-size: 20px;"><%=element.post_title%></a>
+                                </td>
+                            </tr>                      
+                        <% }%>
+                    <!-- </tbody> -->
+                </table>
+            </div>
+            </div>
+
+                <!--aside-->
+                <div class="col-sm-2 div_aside">
+                    <div class="upload_thing" style="border: 1px solid; border-radius: 25px; border-color: #D7B5EB;">
+                        <p style="text-align: center; font-size: 1.5em; padding-top: 3%;">판매등록</p>
+                        <button type="button" class="btn btn-default btn-block" style="height: 50px; font-size: 2em; " onclick="go_to_sell()">Click</button>
+                    </div>
+                </div>
+        
+            </div>
+    
+        </div>
+
+        <div id="backToTop">
+            <!-- <a class="scrolltop" type="button" onclick="$('html').animate({scrollTop : 0}, 300)"> -->
+                <span> <button type="button" class="btn btn-link" onclick="$('html').animate({scrollTop : 0}, 300)">TOP</button></span>
+           
+            </div>
+    <!-- footer -->
+    <div class="container-fluid div_footer "> 
+        <footer><p style="text-align: center; margin-bottom: 2%; font-size: medium;">Criminal Block</p></footer>
+      
+    </div>
+
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/move.js"></script>
+
+</body>
+</html>

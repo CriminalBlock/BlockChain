@@ -1,0 +1,74 @@
+db port 3320으로 바꿈
+
+admin_page.ejs id값 중복되어있어서 삭제함 -> 이것때문에 disable안됐음
+
+//multer라는 모듈 추가
+express-fileupload라는 모듈 추가 -> main.js 수정
+
+중고거래 메인페이지용 css main.css -> main_main.css로 바꿈
+중고거래 메인페이지 모든 ‭img, css, js경로 img/~, ,css/~, js/~로 바꿈
+
+router에 중고거래 메인페이지용 router_main.js만듬
+
+3.ejs form 추가
+
+1.ejs 판매등록 시 로그인 하게 함 
+
+8.ejs에 form 태그와 input file 추가함
+==> form 태그에 action을 쓰지 않고 submit에 formaction속성을 지정하면 여러개의 submit 
+버튼을 사용할 수 있다.
+
+8.ejs에 내용 name, 임시저장 type submit으로 수정
+
+사진 업로드를 안할수도있어서 조금 우회해서 사진 올리기를 하는데 왜 name으로는 이벤트 발
+생 시 값 변경이 안되고 id로 가져올 때는 값 변경이 될까????
+
+임시 수정할 때 사진을 다 등록 안 할 경우도 있기때문에 case문으로 경우를 나눴다. 경우를 
+나누는 것에 사용한 것은 input 속성 hidden을 사용하여 보이지 않는 정보를 보낼 수 있도록
+했다.
+파일을 첨부할 경우 input 값은 true로 바뀌고 첨부하지 않을 경우 false로 주어 문제를 해결
+했다.
+(자바스크립트에서 switch문의 경우 배열의 값은 구분이 불가하기때문에 join으로 그 안의 값을
+하나로 묶어 경우를 구분지었다.)
+
+console.log로 req.body를 출력해보니 name값이 선언이 안되면(id는 선언) 포함되지 않는다. 
+
+true, false값은 db에 1,0으로 들어간다.
+
+
+
+===============================================================================
+- __dirname 경로가 c:\Users\user\Documents\GitHub\main_page\router 까지 잡혀서 이미지가 엉뚱한 곳에 저장
+    => dirname.substring(0,41)로 잘라줌
+
+- 이미지가 저장이 안됨 => 8.ejs에서 move.js 경로를 못받고 있었음 (js/move.js 를 /js/move.js로 바꿔줌)
+
+- 메인페이지의 경우 로그인했을때(main/1), 로그인안했을때(main/1_in) 두 개에 상품정보 보여줌(각각 라우터에서 데이터 뿌려줌)
+
+- 등록페이지(8.ejs) 사진등록 input type file의 onchange()함수에 썸네일 코드 추가(move.js에 작성)
+
+- 임시저장한 데이터 보여주는 페이지(21.ejs) 추가, 임시저장한(determinant==0) 데이터들만 보여줌
+
+- 상세페이지(14.ejs) 이미지 슬라이드에 front,side,back이미지 받아오는 변수 추가
+
+- 메인페이지(1.ejs, 1_in.ejs)에 상품div마다 id값을 trans_num으로 줌
+
+- 메인페이지(1.ejs, 1_in.ejs) 상품div for문으로 수정
+
+category_1, category_1_in -> css main_1.css로 따로 적용
+category db column명 수정함. 카카오톡 확인 바람.
+category_1, category_1_in 물품 리스트 div에 name 속성 추가함
+
+
+0919: router_main에 검색기능 추가 (case문 사용해서 좀 허접=> 다른 방법 찾으면 교체 가능)
+
+사진 파일 업로드 시 미리보기 중첩되는 것 수정
+임시 저장 수정 시 기존 저장된 사진파일 미리보기에 출력되게 함. 기본 값으로 줄 수 없음 -> src 경로 -> localhost:2000/img~이렇게 로컬 드라이브가 아님
+
+8.ejs, 8_temp.ejs 수정 중...=> 등록버튼 누를 시 필요 정보 유무 확인기능
+
+0921: css수정
+    - fontawesome 링크추가
+    - style.css추가
+
+0924: 검색기능 비동기로 수정 완료

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.theme.css">
+    <link rel="stylesheet" href="css/login.css">
+    
+</head>
+<body>
+    <div id="wrapper">
+        <header> 
+            <div class="container">
+                <!-- 점보컨테이너 -->
+                <div class="jumbocontainer">
+                    <h1>Welcome!</h1>
+                    <p class="p">회원가입 페이지입니다</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- 상단 목록 네비게이션 바 -->
+        <div class="navbar navbar-inverse" >
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">    
+                        <i class="fa fa-bars" style="font-size: 30px; color: azure;" ></i> </button>
+                        <a class="navbar-brand" href="#" style="font-weight: 600;">CriminalBlock</a> 
+                </div> 
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                         
+                        <li><a href="#" class="aboutUs">About Us</a></li>
+                        <li><a href="http://localhost:2000/admin_user?num=1" class="users">회원관리</a></li>
+                        <li><a href="#" class="contact">Contact</a></li>      
+                    </ul>
+                </div>    
+            </div>
+        </div>  
+
+        <!-- ========================================= -->
+      
+
+
+    <div class="content" role="main">
+        <form action="suc" method="POST">
+            <div class="containerform">
+                <h1 style="font-weight: 600;">Sigh-Up</h1>
+                <br>
+                    <p>Please fill in this form to register</p>
+                <hr>
+
+                <form class="form-horizontal"action="suc" method="POST">
+                    <label for="id"><b>ID</b></label>
+                    <input type="text" placeholder="Create New Id" name="id" id="id" required>
+
+                    <label for="pw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="pw" id="pw" required>
+
+                    <div class="container signup">
+                        <span> Almost done! <button type="button" class="btn btn-link" style="text-decoration: none;" value="확인" onclick="check1()">인증 후 가입</button> </span> 
+                     </div>
+                    
+                    <button type="submit" class="loginbtn" value="회원가입"  onclick="newacc()">Create your account</button>
+                </div>
+                 <!-- <button type="button" class="signupbtn" value="확인" onclick="check1()">인증</button> -->
+        </form>
+
+    </div>
+
+<!-- 아래거는 wrapper div 태그랑 짝꿍 -->
+</div> 
+
+
+
+
+    <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/check.js"></script>
+</body>
+</html>

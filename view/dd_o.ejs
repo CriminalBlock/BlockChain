@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script language="javascript" type="text/javascript" src="abi.js"></script>
+
+</head>
+<body>
+    <header>
+        <div class="container"  >
+            <!-- 점보 컨테인너 -->
+            <div class="jumbocontainer">
+                <h1>컨텐츠관리 페이지</h1>
+            </div>
+                <div class="box" id="boxrow">
+                    <div class="row">
+                    <span class="col-xs-3 col-xs-offset-9 col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10">
+                        <span>반갑습니다 <%=name%>님!</span>
+                         
+                    </div>
+                </div>
+        </div>
+    </header>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            
+            <i class="fa fa-bars" style="font-size: 30px; color: azure;" ></i> </button>
+            <!-- 여긴 움직이지 않음 -->
+                <a class="navbar-brand" href="#" style="font-weight: 600;">CriminalBlock</a>
+                        
+        </div>
+        <!-- 위에 까지는 inverse거꾸로 오른쪽 아이콘이랑 왼쪽 브랜드이름 -->
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="http://localhost:2000/al3?num=1" class="active">컨텐츠관리</a></li>
+                <li><a href="#" class="active">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"> mypage</a></li>
+                <li><a href="http://localhost:2000/">sign out</a></li>
+            </ul>   
+            <!-- 위에까지는 dropdown 메뉴들 -->
+        </div>
+
+    </div>
+</nav>
+
+
+    <hr>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>번호 : <span><%=result[0].trans_num-1%></span></th>
+                <th>제목 : <%=result[0].post_title%></th>
+                <th>글쓴이 : <%=result[0].user_id%></th>
+            </tr>
+        </thead>
+    </table>
+    <hr>
+    <div class="form-group">
+        <label class="col-sm-1 control-label">내용 : </label> <%=result[0].post_content%><br>
+        <img src= "img/upload/<%=result[0].post_picname_front%>jpg" width="300px" height="300px"><img src= "img/upload/<%=result[0].post_picname_side%>jpg" width="300px" height="300px"><img src= "img/upload<%=result[0].post_picname_back%>jpg" width="300px" height="300px">
+
+    </div>
+   <span id="number" style="display: none;"><%=result[0].trans_num%></span>
+    <br>
+    <br>
+    <br>
+    <div align="center">
+        <button type="button" class="btn btn-danger" id="<%=result[0].trans_num%>" onclick="seller(this.id)">판매자에게 eth 전송</button>
+        <button type="button" class="btn btn-primary" id="<%=result[0].trans_num%>" onclick="buyer(this.id)">구매자에게 eth 전송</button>
+    </div>
+    <!-- <script>
+        var Web3 = require("web3");
+        var web3 = new Web3('http://localhost:8545');
+        function seller(){
+            var address = '<%#=result[0].post_contract_address%>'
+            var contract = new web3.eth.Contract(abi,address)
+            return escrow.methods.seller_win().call().then(result=>console.log("contract call:"+result))
+        }
+    </script> -->
+    <br>
+    <br>
+    <br>
+      <!--새롭게 추가된 내용-->
+      <% for (var [index, element] of result2.entries()){ %>
+        <form action="del_com" method="GET">
+            <table align="center">
+                <tr>
+                    <td>
+                        작성자 : <%=element.user_id%> <input type="hidden" value="<%=element.user_id%>" name="com_id"> <input type="text" value="<%=result[0].trans_num%>" name="com_trans_num" hidden>
+                    </td>
+                    <td style="width: 85%;">
+                        내용 : <%=element.post_comment%> <input type="hidden" value="<%=element.post_comment%>" name="com_comment">
+                    </td>
+                    <td>
+                        <button type="submit" name="btn_delete" class="btn btn-defualt">삭제</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    <% } %>
+    <!-- ================================================ -->
+    <hr>
+    <div class="form-horizontal">
+        <% if(result[0].trans_num==1){ %>
+        <% }else{ %>
+        <span class="glyphicon glyphicon-chevron-left"></span> <a href="http://localhost:2000/al41?number=<%=result[0].trans_num-1%>">이전글</a>
+        <% }%>
+        <% if(result[0].trans_num==result1[0].cnt){ %>
+            <% }else{ %>
+            <a href="http://localhost:2000/al41?number=<%=result[0].trans_num+1%>">다음글</a> <span class="glyphicon glyphicon-chevron-right"></span>
+        <% }%>
+        <div class="col-sm-offset-10">
+            <button type="button" class="btn btn-primary btn-sm" onclick="check2()">목록</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="delete1()">삭제</button>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#rewrite">수정</button>
+        </div>
+    </div>
+    <div class="modal fade" id="rewrite" tabindex="-1" role="dialog" aria-labelledby="writeLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="writeLabel">방명록 수정</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="al5">
+                        <div class="form-group">
+                            <label for="title_number" class="control-label">번호 : </label>
+                            <input type="text" class="form-control" name="title_number" readonly value="<%=result[0].trans_num%>">
+                          </div>
+                        <div class="form-group">
+                          <label for="title_name" class="control-label">제목 : </label>
+                          <input type="text" class="form-control" name="title_name">
+                        </div>
+                        <div class="form-group">
+                          <label for="content_text" class="control-label">내용 : </label>
+                          <textarea class="form-control" name="content_text"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">작성</button>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/delete.js"></script>
+    <script src="js/check.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+  
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.responseType = 'json';
+        function loadXMLDoc(x) {
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 &&(this.status ==200 || this.status == 201)){
+                    var data = this.response;
+                    document.getElementById(x).value = data.val;
+                    document.getElementById(x).parentNode.previousSibling.previousSibling.innerHTML = data.sta;
+                }
+            };
+            var data = {
+                val : document.getElementById(x).value,
+                id : document.getElementById(x).id
+            };
+            var data_json = JSON.stringify(data);
+            xhttp.open("POST", "disable_result", true);
+            xhttp.setRequestHeader('Content-type', 'application/json'); //보내는 데이터가 json이라는 것을 알려야 함 만약 안 알리면 빈 객체 출력
+            xhttp.send(data_json);
+        };
+        function ban(x) {
+            var check = confirm("정말 삭제하시겠습니까?");
+            var id = document.getElementById(x).id;
+            console.log(check);
+            if (check == true){
+                location = "http://localhost:2000/delete_user?id="+id;
+            };
+        };
+    </script>
+</head>
+<body style="height: 1500px">
+
+    <div id="wrapper">
+        <header>
+            <div class="container"  >
+                <!-- 점보 컨테인너 -->
+                <div class="jumbocontainer">
+                    <h1>회원관리 페이지</h1>
+                </div>
+                    <div class="box" id="boxrow">
+                        <div class="row">
+                        <span class="col-xs-3 col-xs-offset-9 col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10">
+                            <span>반갑습니다 <%=name%>님!</span>
+                             
+                        </div>
+                    </div>
+            </div>
+        </header>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                
+                <i class="fa fa-bars" style="font-size: 30px; color: azure;" ></i> </button>
+                <!-- 여긴 움직이지 않음 -->
+                    <a class="navbar-brand" href="#" style="font-weight: 600;">CriminalBlock</a>
+                            
+            </div>
+            <!-- 위에 까지는 inverse거꾸로 오른쪽 아이콘이랑 왼쪽 브랜드이름 -->
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="http://localhost:2000/al3?num=1" class="active">컨텐츠관리</a></li>
+                    <li><a href="#" class="active">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"> mypage</a></li>
+                    <li><a href="http://localhost:2000/">sign out</a></li>
+                </ul>   
+                <!-- 위에까지는 dropdown 메뉴들 -->
+            </div>
+
+        </div>
+    </nav>
+
+<!--아래 메인 컨텐츠 float: left  -->
+<div class="content" role="main"> 
+    
+    <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="writeLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="writeLabel">검색</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="al6_user">
+                        <div class="form-group">
+                            <select name="list">
+                                <option value="idguest">번호</option>
+                                <option value="user_id">아이디</option>
+                                <option value="wallet_status">지갑상태</option>
+                            </select>
+                            <input type="text" name="search_tar">
+                        </div>  
+                        <button type="submit" class="btn btn-primary">검색하기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        <br>
+
+    <table class="table table-striped table-hover .table-responsive">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>아이디</th>
+                <th>지갑상태</th>
+                <th>권한 조정</th>
+                <th>추방</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var [index, element] of result1.entries()){ %>
+                <tr>
+                    <th scope="row"><%=index%></th>
+                    <td><%=element.user_id%></td>
+                    <td><%=element.wallet_status%></td>
+                    <td><input type="button"  class="btn btn-primary btn-lg active" style="padding:4px" value="disable" id="<%=element.user_id%>" onclick="loadXMLDoc(this.id)"></td>
+                    <td><button type="button" class="btn btn-danger btn-lg" style="border-radius: 50%; padding: 4px;" onclick="ban('<%=element.user_id%>')">ban</button></td>
+                </tr> 
+            <% }%>
+        </tbody>
+    </table>
+
+    <div class="center-block">
+        <% var tar = Math.ceil(result[0].cnt/10);%>
+        <% for(var i=1; i<=tar; i++) { %>
+            <% if(i==present){ %>
+                <b><%=i%></b>
+            <% }else{ %>
+        <a href="http://localhost:2000/al3?num=<%=i%>"><%=i%></a>&nbsp;&nbsp;
+            <% }%>
+        <% } %>
+    </div>
+
+    <div class="form-horizontal pull-right">
+        <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#search">검색</button>
+        <button type="button" class="btn btn-primary btn-sm " onclick="check3()">전체 조회</button>
+    
+    </div>
+
+    <div style="padding: 20px 20px 20px 20px">
+
+      </div>
+<!-- 아래 메인 content div짝꿍 -->
+    </div>
+
+    <aside class="sidebar"> 
+        <!-- 패널 타이틀 -->
+        <div class="sale">
+        <div class="panel panel-info">
+            <div class="panel-heading"><a href="javascript:void(0)">
+                <h3 class="panel-title" style="font-size: 20px; font-weight: 600;">판매등록</h3></a>
+            </div>
+            <!-- 사이드바 메뉴목록 -->
+            <ul class="list-group">
+                <li class="list-group-item"><a href="javascript:void(0)">판매글</a></li>
+                <li class="list-group-item"><a href="javascript:void(0)">구매글</a></li>
+            </ul>
+        </div>   
+        </div>
+      
+        <div id="backToTop">
+        <!-- <a class="scrolltop" type="button" onclick="$('html').animate({scrollTop : 0}, 300)"> -->
+            <span> <button type="button" class="btn btn-link" onclick="$('html').animate({scrollTop : 0}, 300)">TOP</button></span>
+       
+        </div>
+    </aside>   
+
+    <!-- 아래 footbar -->
+<footer class="page-footer font-small unique-color-dark pt-4 navbar-bottom" id="footer">
+
+    <!-- Footer Elements -->
+    <div class="container">
+        <!-- Call to action -->
+        <!-- <ul class="list-unstyled list-inline text-center py-2">
+        <li class="list-inline-item">
+            <h5 class="mb-1">Register for free</h5>
+        </li>
+        <li class="list-inline-item">
+            <a href="#!" class="btn btn-outline-white btn-rounded">Sign up!</a>
+        </li>
+        </ul>    -->
+   
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">©</div>
+    </div>
+    </footer>
+   
+
+
+
+
+
+
+
+
+
+
+    <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/check.js"></script>
+
+ </div>
+</div>
+</body>
+</html>

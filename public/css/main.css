@@ -1,0 +1,201 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "HelverticaNenu", Arial, Helvetica, sans-serif0;
+    margin: 0;
+    
+}
+
+#wrapper{
+    width: 98%;
+    height: 1500px;
+}
+
+/* .section{
+    width: 98%;
+    height: 1500px;
+    margin: 0 auto;   
+    background-image: url('/img/image.jpg');
+    background-size: 100% 100%;
+    opacity: 0.3;
+    border: 1px; 
+} */
+
+
+.box #boxrow{
+    font-size: 16px;
+    font-weight: normal;
+    text-decoration: #f1f1f1;
+}
+
+.container{
+    width: 100%;
+    padding: 2%;
+    padding: 30px 15px;
+    color: #cdbfe3;
+    text-shadow: 0 1px 0 rgba(0,0,0,.1);
+    background-color: #6f5499;
+    margin: 0;   
+    margin-top: 0; 
+    /* border-end-end-radius: 5px; */
+}
+.jumbocontainer {
+    margin-bottom: 0;
+    font-weight: 500;
+    line-height: 1.4;
+}
+.jumbocontainer h1{
+    text-align: center;
+    font-weight: bold;
+}
+
+.navbar .navbar-inverse{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    color: #101010;
+}
+
+.container-fluid li{
+    color: #563d7c;
+    text-align: center;
+    /* padding: 14px 15px; */
+    /* text-decoration: none; */
+    font-size: 20px;
+    /* font-weight: 550; */
+}
+
+.navbar-brand{
+    font-size: x-large;
+}
+
+/* Change the color of links on hover */
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .navbar a:active {
+      background-color: black;
+      color: white;
+  }
+
+.img{
+    width: 100%;
+}
+
+.content{
+    float: left;
+    width: 80%;
+    height: 100%;
+    padding: 1.5%;
+    font-weight: 500;
+}
+.content a{
+    color: black;
+}
+
+.sidebar{
+    float: right;
+    position: relative;
+    width: 20%;
+    height: 100%;
+    padding: 1.5%;
+    color: black;
+    font-weight: 500;
+   
+}
+div.sale {
+    position: sticky;
+    top: 0;
+    padding: 5px;
+    border: 1px;
+}
+
+.sale a, li{
+    height: 100%;
+    /* padding: 1.5%; */
+    /* z-index: 2; */
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+
+}
+
+#mymodalBtn .btn-primary .btn-sm{
+  /* position: absolute;
+  top: 50%;
+  left: 50%; */
+  margin: 10px;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.modal-fade{
+    display: none;
+}
+
+/* .fade{ 
+    z-index: 1050 !;
+    opacity: 0;
+    -webkit-transition: opacity 1x linear;
+    transition: opacity 1s linear;
+    float: right; 
+} */
+
+/* ================================================= */
+
+
+/* @media screen and (max-width: 767px) {
+    nav.navbar a:not(:first-child) {display: none;}
+    nav.navbar a.icon {
+      float: right;
+      display: block;
+    }
+  }
+  
+@media screen and (max-width: 780px) {
+nav.navbar.responsive {position: relative;}
+nav.navbar.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+}} */
+
+#backToTop .btn-link{
+    position: absolute;
+    right: 20px;
+    bottom: 2%;
+    padding: 5px;
+    text-decoration: none;
+    box-sizing: border-box;
+    border: 1px solid #868e96;
+    border-radius: 50%;
+    page-break-after: auto;
+    /* z-index: 3; */
+    transition: all 0.5s ease-in-out;
+}
+footer{
+    clear: both;
+    width: 100%;
+    height: 100px;
+}
+
+/* ================================================= */ 
+
+/* section.parallax-bg-1{
+    background-size: cover;
+    height: auto;
+    opacity: 0.8;
+    text-align: center;
+    color: black;
+    margin-bottom: 0;
+    background-color: #ffffff;
+    background-color: rgba(255,255,255,0.5); } */
+    /* 투명도 설정해주면 예쁠듯 */
+   

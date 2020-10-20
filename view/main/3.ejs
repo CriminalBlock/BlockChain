@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <script src="js/move.js"></script>
+    <style>
+        .header-area{
+            font-family: 'BBTreeGB';
+            font-size: 30px;
+            }
+
+        #login{
+            font-family: 'BBTreeGB';
+        }
+        .col-sm-1{
+            width: auto;
+            line-height: normal;
+        }
+        #login{
+            font-size: 2em;
+        }
+        #tr1{
+            text-align: right;
+        }
+        #td_text{
+            padding-right: 20px;
+        }
+        #tr2{
+            text-align: right;
+        }
+        #btn{
+            font-size: 1.3em;
+        }
+        .btn{
+            margin-left: 15%;
+        }
+        a{
+            color: black;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Header Start -->
+    <div class="header-area" style="font-size: 40px;">
+        <div class="main-header ">
+            <div class="header-top top-bg d-none d-lg-block">
+                <div class="container-fluid">
+                    <a href="http://localhost:2000/main_1"> <img src="img/로고.png" style="margin-top:2%; " ></a> 
+                    <div class="col-xl-12">
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <div class="header-info-right" align="right">
+                                <ul>                                          
+                                    <li><a href="http://localhost:2000/main_login">로그인</a></li>
+                                    <li><a href="#">장바구니</a></li>
+                                    <li><a href="http://localhost:2000/customer">고객센터</a></li>
+                                    <li><a href="http://localhost:2000/main_login">마이페이지</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div align="center" style="width: 55%; margin-left: auto; margin-right: auto; margin-top: 5%;">
+        <form action="/main_1_in" method="POST" class="form-horizontal">
+        <!-- <div  align="center" style="margin-top: 5%;"><img src="img/6cbac97c-3c82-4e86-8314-cb85b900a759.png"></div> -->
+            <div id="login" align="center" style="margin-top: 5%;">
+                  
+                <div class="form-group text-right">
+                    <label class="col-sm-4">아이디</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="id" placeholder="아이디를 입력하세요">
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <label class="col-sm-4">비밀번호</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" name="pw" placeholder="비밀번호를 입력하세요">
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="form-group col-sm-10" style="margin-top: 2%; padding-left: 8%;">
+                    <button type="submit" class="btn btn-default col-sm-1">로그인</button>
+                    <button type="button" onclick="sign_up()" class="btn btn-default col-sm-1">회원가입</button>
+                    <button type="button" class="btn btn-link col-sm-1" style="background-color: white; color: #337ab7;">아이디/비밀번호 찾기</button> 
+                </div>
+            </div>
+        </form>
+
+        <div class="col-sm-12" style="margin-top: 5%; font-size:40px; font-family: 'BBTreeGB';">
+            <a href="http://localhost:2000/main_1"> <i class="fas fa-reply"></i> 메인으로 돌아가기</a>
+        </div>
+    
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.theme.css">
+    <link rel="stylesheet" href="css/suc.css">
+</head>
+<body>
+
+    <div id="wrapper">
+        <header> 
+            <div class="container">
+                <!-- 점보컨테이너 -->
+                <div class="jumbocontainer">
+                    <h1>Welcome! 회원이이 되었습니다</h1>
+                    <p class="p">메인 페이지로 가서 로그인 해주세요.</p>
+                </div>
+            </div>
+        </header>
+   
+        <!-- 상단 목록 네비게이션 바 -->
+        <div class="navbar navbar-inverse" >
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">    
+                        <i class="fa fa-bars" style="font-size: 30px; color: azure;" ></i> </button>
+                        <a class="navbar-brand" href="#" style="font-weight: 600;">CriminalBlock</a> 
+                </div> 
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                         
+                        <li><a href="#" class="aboutUs">About Us</a></li>
+                        <li><button type="button" class="btn btn-link" style="text-decoration: none;" value="메인" onclick="back()">로그인하러가기</button></li>
+                        <li><a href="#" class="contact">Contact</a></li>      
+                    </ul>
+                </div>    
+            </div>
+        </div>  
+    </div>
+
+        <div class="content" role="main">
+
+        <br>
+        <button id="call" type="button" value="메인으로" onclick="back()">메인으로</button>
+        <div class="imgbox">
+            <img src="/img/bg.jpg" alt="to main">
+            
+        </div>
+
+
+    </div>
+    
+        <!-- ========================================= -->
+ 
+
+
+    <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/fn2.js"></script>
+</body>
+</html>

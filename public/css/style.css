@@ -1,0 +1,114 @@
+@font-face {
+  font-family: 'BBTreeGB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+.header-area .header-top .header-info-right ul li a {
+  padding-left: 36px;
+  font-size: 30px;
+  text-transform: capitalize;
+  color: #fff;
+}
+.header-area .header-top {
+  padding: 13px 80px;
+}
+.top-bg {
+  background: black;
+} 
+.header-area .header-top .header-info-right ul li {
+  display: inline-block;
+}
+
+.btn {
+    /* background: rgba(207, 137, 240, 0.89); */
+    background: #D7B5EB;
+    -moz-user-select: none;
+    text-transform: capitalize;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 0;
+    margin-bottom: 0;
+    /* padding: 27px 44px; */
+    border-radius: 25px;
+    margin: 10px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+    position: relative;
+    z-index: 1;
+    border: 0;
+    overflow: hidden;
+    margin: 0;
+    font-family: 'BBTreeGB';
+  }
+  
+.btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* background:#AE73D2; */
+    z-index: 1;
+    border-radius: 5px;
+    /* transition: transform 0.5s; */
+    transition-timing-function: ease;
+    transform-origin: 0 0;
+    transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+    transform: scaleX(0);
+  }
+  
+.btn:hover::before {
+    transform: scaleX(1);
+    color: #fff !important;
+    z-index: -1;
+  }
+a,
+button {
+  color: #fff;
+  outline: medium none;
+}
+a {
+    color: #635c5c;
+  }
+a,
+.button {
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+a:hover {
+  /* color: #fff; */
+  color: #D7B5EB;
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#backToTop .btn-link{
+  position: absolute;
+  right: 20px;
+  margin-bottom: 2%;
+  padding: 10px;
+  text-decoration: none;
+  /* box-sizing: border-box; */
+  /* border: 0.5px solid #868e96; */
+  /* border-radius: 50%; */
+  page-break-after: auto;
+  transition: all 0.5s ease-in-out;
+}
+
+.sol-sm-2 .div_aside{
+  height: 100%;
+
+}

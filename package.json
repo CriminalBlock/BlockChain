@@ -1,0 +1,17 @@
+{
+    "name": "name",
+    "version": "1.0.0",
+    "dependencies": {
+        "body-parser": "*",
+        "cookie-parser": "*",
+        "ejs": "^3.1.5",
+        "express": "*",
+        "express-fileupload": "*",
+        "express-session": "*",
+        "mysql2": "*",
+        "web3": "*",
+        "solc": "0.5.16",
+        "fs": "*",
+        "ethers": "*"
+    }
+}
