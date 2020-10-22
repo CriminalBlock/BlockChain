@@ -2,14 +2,14 @@
 function check1(){
     var name = document.getElementsByName("id");
     console.log(name[0].value);
-    location="http://localhost:2000/newacc_correct?"+"id="+name[0].value;
+    location="http://10.10.202.239:2000/newacc_correct?"+"id="+name[0].value;
 };
 
 function check2(){
-    location="http://localhost:2000/al3?num=1";
+    location="http://10.10.202.239:2000/al3?num=1";
 };
 function check3(){
-    location="http://localhost:2000/admin_user?num=1";
+    location="http://10.10.202.239:2000/admin_user?num=1";
 };
 
 var xhttp = new XMLHttpRequest();
@@ -212,4 +212,65 @@ function exchange_success(x){
     xhttp.open("GET","exchange_success?ex_num="+data.ex_num, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(data_json)
+}
+
+
+function final_check(){
+    xhttp.onreadystatechange=function(){
+        if(this.readyState == 2 || this.readyState ==3){
+            alert("로딩 중....")
+        }else if (this.readyState ==4 &&(this.status == 200 || this.status == 201)){
+            var data = this.response;
+            if(data.check){
+                let y = confirm("상품이 맞습니까?");
+                if(y){
+                    document.getElementsByName('booln')[0].value = y;
+                    document.getElementById("auth_code").submit();
+                }else{
+                    document.getElementsByName('booln')[0].value = y;
+                    document.getElementById("auth_code").submit();
+                }
+            }else{
+                document.getElementById("auth_code").submit();
+            }
+        }
+    }
+    var data ={
+        num : document.getElementsByName('num')[0].value,
+        author : document.getElementsByName('author')[0].value
+    }
+    var data_json = JSON.stringify(data)
+    xhttp.open("POST", "pre_authorize", true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(data_json);
+}
+
+function final_check_seller(){
+    xhttp.onreadystatechange=function(){
+        if(this.readyState == 2 || this.readyState ==3){
+            alert("로딩 중....")
+        }else if (this.readyState ==4 &&(this.status == 200 || this.status == 201)){
+            var data = this.response;
+            if(data.check){
+                let y = confirm("상품이 맞습니까?");
+                if(y){
+                    document.getElementsByName('booln')[0].value = y;
+                    document.getElementById("auth_code").submit();
+                }else{
+                    document.getElementsByName('booln')[0].value = y;
+                    document.getElementById("auth_code").submit();
+                }
+            }else{
+                document.getElementById("auth_code").submit();
+            }
+        }
+    }
+    var data ={
+        num : document.getElementsByName('num')[0].value,
+        author : document.getElementsByName('author')[0].value
+    }
+    var data_json = JSON.stringify(data)
+    xhttp.open("POST", "pre_authorize_seller", true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(data_json);
 }

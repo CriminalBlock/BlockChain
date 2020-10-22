@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Nanum+Brush+Script&display=swap" rel="stylesheet">     <!--흐물거리는 폰트-->
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">        <!--동글네모난 폰트-->
+    <script src="js/check.js"></script>
 
     <script>
         alert("환불 진행 중입니다.");
@@ -50,15 +51,15 @@
         <div class="main-header ">
             <div class="header-top top-bg d-none d-lg-block">
                 <div class="container-fluid">
-                    <a href="http://localhost:2000/main_1_in"> <img src="img/로고.png" style="margin-top:2%; " ></a> 
+                    <a href="http://10.10.202.239:2000/main_1_in"> <img src="img/로고.png" style="margin-top:2%; " ></a> 
                     <div class="col-xl-12">
                         <div class="row d-flex justify-content-between align-items-center">
                             <div class="header-info-right" align="right">
                                 <ul>                                          
-                                    <li><a href="http://localhost:2000/main_1">로그아웃</a></li>
+                                    <li><a href="http://10.10.202.239:2000/main_1">로그아웃</a></li>
                                     <li><a href="#">장바구니</a></li>
-                                    <li><a href="http://localhost:2000/customer">고객센터</a></li>
-                                    <li><a href="http://localhost:2000/temp_list">마이페이지</a></li>
+                                    <li><a href="http://10.10.202.239:2000/customer">공지사항</a></li>
+                                    <li><a href="http://10.10.202.239:2000/temp_list">마이페이지</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -73,7 +74,7 @@
         <header style="text-align: center;">
 
             <div class="text-center" style="width:60%; display: inline-block;">
-            <!-- <a href="http://localhost:2000/main_1_in"><img src="img/6cbac97c-3c82-4e86-8314-cb85b900a759.png"></a> -->
+            <!-- <a href="http://10.10.202.239:2000/main_1_in"><img src="img/6cbac97c-3c82-4e86-8314-cb85b900a759.png"></a> -->
         </div>
         <a class="text-right" style="float: right; color: black;">반갑습니다 <%=name%>님! 보유 금액: <%=money%> eth</a>
 
@@ -172,11 +173,12 @@
             <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
-                    <form method="POST" action="/authorize_seller">
+                    <form method="POST" action="/authorize_seller" id="auth_code">
                         <label for="author">인증 :</label>
                         <input type="text" value="<%=num%>" name="num" hidden>
+                        <input type="text" name="booln" hidden>
                         <input type="text" name="author">
-                        <button type="submit">인증</button>
+                        <button type="button" onclick="final_check_seller()">인증</button>
                     </form>
                   </div>
                 </div>

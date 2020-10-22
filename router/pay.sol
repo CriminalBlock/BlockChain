@@ -38,16 +38,7 @@ contract escrow {
             }
         }
     }
-    // function certificate_product(bytes32 check_product) public {                    //인증하는 함수
-    //     require(msg.sender != seller_address);
-    //     if(product == check_product){
-    //         seller_address.transfer(buyers[target_person].coin);
-    //         buyers[target_person].coin = 0;
-    //     }else{
-    //         msg.sender.transfer(buyers[target_person].coin);
-    //         buyers[target_person].coin = 0;
-    //     }
-    // }
+
     function how_much() public view returns(uint[] memory){                         //제시가격 보여주는 함수
         uint[] memory coins = new uint[](nop);
         for(uint8 i = 0; i < nop; i++) {
@@ -63,9 +54,12 @@ contract escrow {
         msg.sender.transfer(buyers[tar].coin);
         buyers[tar].coin = msg.value;
     }
-    function certificate_product(bytes32 check_product) public returns(bool){                    //인증하는 함수
+    function certificate_product(bytes32 check_product, bool final_check) public returns(bool){                    //인증하는 함수
         require(msg.sender != seller_address);
-        if(product == check_product){
+        if(
+            (product == check_product)&&
+            (final_check == true)
+            ){
             seller_address.transfer(buyers[target_person].coin);
             buyers[target_person].coin = 0;
             return true;
@@ -73,9 +67,12 @@ contract escrow {
         re_product = check_product;
         return false;
     }
-    function certificate_product_seller(bytes32 check_product2) public returns(bool){                    //인증하는 함수
+    function certificate_product_seller(bytes32 check_product2, bool final_check) public returns(bool){                    //인증하는 함수
         require(msg.sender == seller_address);
-        if(re_product == check_product2){
+        if(
+            (re_product == check_product2)&&
+            (final_check == true)
+            ){
             buyers[target_person].wallet_name_buyer.transfer(buyers[target_person].coin);
             buyers[target_person].coin = 0;
             return true;
@@ -120,6 +117,18 @@ contract escrow {
             );
         msg.sender.transfer(buyers[target_person].coin);
     }
+    function pre_check(bytes32 check_product) public view returns(bool){
+        if(check_product==product){
+            return true;
+        }
+        return false;
+    }
+    function pre_check_re(bytes32 check_product) public view returns(bool){
+        if(check_product==re_product){
+            return true;
+        }
+        return false;
+    }
     
-
 }
+

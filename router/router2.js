@@ -10,7 +10,7 @@ const mysql = require("mysql2");
 const { NULL } = require("mysql2/lib/constants/types");
 let conn_info = {
     host : 'localhost',
-    port : 3300,
+    port : 3320,
     user : 'root',
     password : '1234',
     database : 'mydb'
@@ -390,35 +390,7 @@ module.exports = function(app){
             
         });
     });
-    // app.get("/al41", function(req,res){
-    //     var name = req.session.data1;
-    //     let page = req.session.data2;
-    //     let conn = mysql.createConnection(conn_info);
-    //     var sql1 = "select trans_num, user_id, post_title, post_content from post where trans_num = ?"
-    //     var sql2 = "select count(*) as cnt from post";
-    //     let number = req.query.number;
-    //     let real_number = parseInt(number);
-    //     console.log(real_number);
-    //     // console.log(number);
-    //     conn.query(sql1, real_number,(err,result)=>{
-    //         console.log(result);
-    //         conn.query(sql2,(err, result1)=>{
-    //             var render_data = {
-    //                 name : name,
-    //                 result : result,
-    //                 result1 : result1
-    //             };
-    //             if(name!=result[0].user_id){
-    //                 res.render("dd.ejs", render_data);             
-    //             }else{
-    //                 res.render("dd_o.ejs",render_data);
-    //             };
-    //         });
-            
-            
-    //     });
-    // });
-
+ 
     app.post("/dd_o_result",parser, async function(req, res){
         let conn = mysql.createConnection(conn_info);
         var sql1 = "insert into comment(user_id, trans_num, post_comment) values (?,?,?)"              

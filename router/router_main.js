@@ -15,7 +15,7 @@ const { stringify } = require("querystring");
 
 let conn_info = {
     host : 'localhost',
-    port : 3300,
+    port : 3320,
     user : 'root',
     password : '1234',
     database : 'mydb'
@@ -141,8 +141,9 @@ module.exports = function(app) {
     app.post('/main_1_in',parser, function(req,res){
         let conn = mysql.createConnection(conn_info);
         let sql1 = "select user_id, password, wallet_value, wallet_add from guest where user_id = ?";
+        console.log(req.session.data1);
         let tar = [req.body.id, req.body.pw];
-        if(typeof req.body.id != undefined){
+        if(req.session.data1 == undefined){
             req.session.data1 = req.body.id;                   
             req.session.data2 = req.body.pw;
         }
@@ -156,6 +157,7 @@ module.exports = function(app) {
                 if (result[0].password != req.session.data2){
                     res.redirect('main_login');
                 }else{
+                    
                     console.log("여기는:",result[0].wallet_value)
                     req.session.data1 = result[0].user_id;                   
                     req.session.data2 = result[0].password;
@@ -167,20 +169,18 @@ module.exports = function(app) {
                         result1.reverse();       //result를 reverse해서 가장 최신게시글이 자동으로 result[0]이 돼서 화면에 뿌려주는 코드            
                         var render_data = {
                             money : result[0].wallet_value,
-                            name : req.body.id,
+                            name : result[0].user_id,
                             result : result1,
                             noproduct : '등록된 상품이 없습니다',
                             noprice : '-',
                             noimg : 'no image'
-
                         }
-                    
-                    res.render('./main/1_in.ejs',render_data);      //로그인 했을 때: main/1_in
+                        res.render('./main/1_in.ejs',render_data);      //로그인 했을 때: main/1_in
                     })
                     let aa = await web3.eth.getBalance(req.session.data3);
-                    let money1 = await web3.utils.fromWei(String(aa));
+                    let money1 = parseInt(aa/1000000000000000000);
                     let sql2 = "update guest set wallet_value = ? where user_id = ?";
-                    conn.query(sql2, [money1-1, req.session.data1], (err)=>{
+                    conn.query(sql2, [money1, req.session.data1], (err)=>{
                         console.log(err)
                     })
                 }
@@ -212,20 +212,18 @@ module.exports = function(app) {
                         result1.reverse();       //result를 reverse해서 가장 최신게시글이 자동으로 result[0]이 돼서 화면에 뿌려주는 코드            
                         var render_data = {
                             money : result[0].wallet_value,
-                            name : req.session.data1,
+                            name : result[0].user_id,
                             result : result1,
                             noproduct : '등록된 상품이 없습니다',
                             noprice : '-',
                             noimg : 'no image'
-
                         }
-                    
-                    res.render('./main/1_in.ejs',render_data);      //로그인 했을 때: main/1_in
+                        res.render('./main/1_in.ejs',render_data);      //로그인 했을 때: main/1_in
                     })
                     let aa = await web3.eth.getBalance(req.session.data3);
-                    let money1 = await web3.utils.fromWei(String(aa));
+                    let money1 = parseInt(aa/1000000000000000000);
                     let sql2 = "update guest set wallet_value = ? where user_id = ?";
-                    conn.query(sql2, [money1-1, req.session.data1], (err)=>{
+                    conn.query(sql2, [money1, req.session.data1], (err)=>{
                         console.log(err)
                     })
                     
@@ -633,15 +631,14 @@ module.exports = function(app) {
             conn.query(sql1, req.session.data1, async (err,result1)=>{
                 req.session.data3 = result1[0].wallet_add;
                 let aa = await web3.eth.getBalance(req.session.data3);
-                let money1 = await web3.utils.fromWei(String(aa));
-                conn.query(sql2, [money1-1, req.session.data1], (err)=> {
+                let money1 = parseInt(aa/1000000000000000000);
+                conn.query(sql2, [money1, req.session.data1], (err)=> {
                     console.log(err)
-                    let render_data = {
-                        name : req.session.data1,
-                        money : result1[0].wallet_value,
-                        result : result,
-                        result1 : result1
-
+                        let render_data = {
+                            name : req.session.data1,
+                            money : result1[0].wallet_value,
+                            result : result,
+                            result1 : result1
                     }
                     res.render('./main/21.ejs', render_data);
                 });
@@ -656,7 +653,7 @@ module.exports = function(app) {
             let MyContract = new web3.eth.Contract(abi);
             let deploy = MyContract.deploy({
                 data: '0x'+bytecode,
-                arguments: [req.body.price[0],ethers.utils.formatBytes32String(req.body.auth_code),'0x5f7e804efb569e8c0708caac0322242430D1e3eC']                // constructor에 저장되는 값들 여기서는 물건 가격과 인증 코드가 해당된다.
+                arguments: [req.body.price[0],ethers.utils.formatBytes32String(req.body.auth_code),'0xe594e2aff848fdf8cae7c4654f55086a6a650331']                // constructor에 저장되는 값들 여기서는 물건 가격과 인증 코드가 해당된다.
                 }).encodeABI();
             let con_addr;
             let sql = 'update post set post_contract_address = ? where post_detail_category = ? and post_price_min = ? and user_id =? and post_picname_front = ?';
@@ -735,7 +732,7 @@ module.exports = function(app) {
         let MyContract = new web3.eth.Contract(abi);
         let deploy = MyContract.deploy({
             data: '0x'+bytecode,
-            arguments: [req.body.price[0],ethers.utils.formatBytes32String(req.body.auth_code),'0x5f7e804efb569e8c0708caac0322242430D1e3eC']                // constructor에 저장되는 값들 여기서는 물건 가격과 인증 코드가 해당된다.
+            arguments: [req.body.price[0],ethers.utils.formatBytes32String(req.body.auth_code),'0xe594e2aff848fdf8cae7c4654f55086a6a650331']                // constructor에 저장되는 값들 여기서는 물건 가격과 인증 코드가 해당된다.
             }).encodeABI();
         let con_addr;
 
@@ -1000,7 +997,7 @@ module.exports = function(app) {
                     img_front : result[0].post_picname_front,
                     img_side : result[0].post_picname_side,
                     img_back : result[0].post_picname_back,
-                    name : result[0].user_id,
+                    name : result1[0].user_id,
                     num : result[0].trans_num,
                     money : result1[0].wallet_value,
                     buyer : y                                 // 구매자 id가 구매자 페이지로도 넘어가므로 추후 보안 문제 발생의 우려가 있음
@@ -1029,8 +1026,10 @@ module.exports = function(app) {
                 }
                 var array_check = [first,second,third,fourth];
 
-                if(typeof req.session.data1 == 'undefined'){
-                    res.render('./main/14_not_login.ejs', data);
+                if(req.session.data1 == undefined){
+                        
+                        res.render('./main/14_not_login.ejs', data);       
+                    
                 }else{
                     let now = Date.now();
                     let limit = new Date(result[0].time_limit).getTime();
@@ -1082,14 +1081,15 @@ module.exports = function(app) {
                             var z = '_cancelled.ejs';
                             
                     }
-                    res.render('./main/14'+z,data);
-                }
+                     
+                        res.render('./main/14'+z,data);
+                    }
             
             }) // 두번쨰 쿼리문 닫기
             let aa = await web3.eth.getBalance(req.session.data3);
-            let money1 = await web3.utils.fromWei(String(aa));
+            let money1 = parseInt(aa/1000000000000000000);
             let sql2 = "update guest set wallet_value = ? where user_id = ?";
-            conn.query(sql2, [money1-1, req.session.data1], (err)=>{
+            conn.query(sql2, [money1, req.session.data1], (err)=>{
                 console.log(err)
             })
         })      //첫번째 쿼리문 닫기
@@ -1837,19 +1837,61 @@ module.exports = function(app) {
         
     })
 
+    app.post('/pre_authorize', parser, function(req,res){
+        let conn = mysql.createConnection(conn_info);
+        let sql = "select post_contract_address from post where trans_num = ?";
+        console.log(req.body.num);
+        conn.query(sql,req.body.num,(err,result)=>{
+            web3.eth.personal.unlockAccount(req.session.data3, req.session.data2, 600);
+            let contract = new web3.eth.Contract(abi, result[0].post_contract_address);
+            contract.methods.pre_check(ethers.utils.formatBytes32String(req.body.author)).call({
+                from: req.session.data3
+            }).then(function(result){
+                let data={
+                    check : result
+                }
+                res.json(data)
+            })
+        })
+    })
+
+    app.post('/pre_authorize_seller', parser, function(req,res){
+        let conn = mysql.createConnection(conn_info);
+        let sql = "select post_contract_address from post where trans_num = ?";
+        console.log(req.body.num);
+        conn.query(sql,req.body.num,(err,result)=>{
+            web3.eth.personal.unlockAccount(req.session.data3, req.session.data2, 600);
+            let contract = new web3.eth.Contract(abi, result[0].post_contract_address);
+            contract.methods.pre_check_re(ethers.utils.formatBytes32String(req.body.author)).call({
+                from: req.session.data3
+            }).then(function(result){
+                let data={
+                    check : result
+                }
+                res.json(data)
+            })
+        })
+    })
+
     app.post('/authorize', parser, function(req,res){
         let conn = mysql.createConnection(conn_info);
         let sql = "select post_contract_address from post where trans_num = ?"
         let sql1 = "update post set auth_buyer = ? where trans_num = ?"
+        let TOD;
+        if(req.body.booln == ''){
+            TOD = false
+        }else{
+            TOD = req.body.booln
+        }
         console.log(req.body.num);
         conn.query(sql, req.body.num, async (err,result)=>{
             res.redirect('/main_1_in');
             web3.eth.personal.unlockAccount(req.session.data3, req.session.data2, 600);
             let contract = new web3.eth.Contract(abi, result[0].post_contract_address);
-             await contract.methods.certificate_product(ethers.utils.formatBytes32String(req.body.author)).send({
+             await contract.methods.certificate_product(ethers.utils.formatBytes32String(req.body.author),TOD).send({
                 from: req.session.data3
             })
-            let con1 = await contract.methods.certificate_product(ethers.utils.formatBytes32String(req.body.author)).call({
+            let con1 = await contract.methods.certificate_product(ethers.utils.formatBytes32String(req.body.author),TOD).call({
                 from: req.session.data3
             })
             conn.query(sql1, [con1, req.body.num], (err)=>{
@@ -1865,14 +1907,20 @@ module.exports = function(app) {
         let conn = mysql.createConnection(conn_info);
         let sql = "select post_contract_address from post where trans_num = ?";
         let sql1 = "update post set auth_seller = ? where trans_num = ?";
+        let TOD;
+        if(req.body.booln == ''){
+            TOD = false
+        }else{
+            TOD = req.body.booln
+        }
         conn.query(sql, req.body.num, async (err,result)=>{
             res.redirect('/main_1_in');
             web3.eth.personal.unlockAccount(req.session.data3, req.session.data2, 600);
             let contract = new web3.eth.Contract(abi, result[0].post_contract_address);
-            await contract.methods.certificate_product_seller(ethers.utils.formatBytes32String(req.body.author)).send({
+            await contract.methods.certificate_product_seller(ethers.utils.formatBytes32String(req.body.author),TOD).send({
                 from: req.session.data3
             });
-            let con1 = await contract.methods.certificate_product_seller(ethers.utils.formatBytes32String(req.body.author)).call({
+            let con1 = await contract.methods.certificate_product_seller(ethers.utils.formatBytes32String(req.body.author),TOD).call({
                 from: req.session.data3
             })
             conn.query(sql1, [con1, req.body.num], (err)=>{
@@ -1884,29 +1932,32 @@ module.exports = function(app) {
 
     })
 
-    app.get('/exchange', function(req,res){
+    app.get('/exchange',async function(req,res){
         let conn = mysql.createConnection(conn_info);
         let sql = 'select user_id,wallet_add,wallet_value, wallet_status from guest where user_id = ?';
         let sql2 = "update guest set wallet_value = ? where user_id = ?";
        
-        conn.query(sql, req.session.data1, async (err,result)=>{
+        conn.query(sql, req.session.data1,(err,result)=>{
             req.session.data3 = result[0].wallet_add;
-            let aa = await web3.eth.getBalance(req.session.data3);
-            let money1 = await web3.utils.fromWei(String(aa));
-            conn.query(sql2, [money1-1, req.session.data3], (err) =>{
-                console.log(err) 
-                if(result[0].wallet_status != 'enabled'){
-                    res.render('./main/exchange_denied.ejs');
-                }else{
-                    let data = {
-                        name : req.session.data1,
-                        money : result[0].wallet_value
-                    }
-                    res.render('./main/exchange.ejs',data);
-                };
-            })
+            if(result[0].wallet_status != 'enabled'){
+                res.render('./main/exchange_denied.ejs');
+            }else{
+                let data = {
+                    name : req.session.data1,
+                    money : result[0].wallet_value
+                }
+                res.render('./main/exchange.ejs',data);
+            }
+        })
+        let aa = await web3.eth.getBalance(req.session.data3);
+        console.log('aa:', aa)
+        let money1 = parseInt(aa/1000000000000000000);
+        console.log('money1:',money1)
+        conn.query(sql2, [money1, req.session.data1], (err) =>{
+            console.log(err) 
+        })
    
-        });
+    
 });
 
 
@@ -1915,17 +1966,17 @@ module.exports = function(app) {
     app.get('/exchanging', async function(req,res){
         let conn = mysql.createConnection(conn_info);
         res.redirect("/main_1_in");
-        await web3.eth.personal.unlockAccount('0x5f7e804efb569e8c0708caac0322242430D1e3eC', 'pass0', 600);
+        await web3.eth.personal.unlockAccount('0xe594e2aff848fdf8cae7c4654f55086a6a650331', 'pass0', 600);
         console.log(req.query.coin)
-        let contract = new web3.eth.Contract(exchange_abi, '0x4F90d02470C177ffDD4d9eC11fC9dE55Ae5B23FA');
+        let contract = new web3.eth.Contract(exchange_abi, '0xdC3077D3B5eE2b6130aae173002e1663bc44Eab2');
         await contract.methods.Execution(req.session.data3).send({
-            from: '0x5f7e804efb569e8c0708caac0322242430D1e3eC',
+            from: '0xe594e2aff848fdf8cae7c4654f55086a6a650331',
             value: req.query.value*1000000000000000000
         })
         let aa = await web3.eth.getBalance(req.session.data3);
-        let money1 = await web3.utils.fromWei(String(aa));
+        let money1 = parseInt(aa/1000000000000000000);
         let sql2 = "update guest set wallet_value = ? where user_id = ?";
-        conn.query(sql2, [money1-1, req.session.data1], (err)=>{
+        conn.query(sql2, [money1, req.session.data1], (err)=>{
             console.log(err)
         })
     })
@@ -1982,8 +2033,8 @@ module.exports = function(app) {
         conn.query(sql, req.session.data1, async (err,result)=>{
             req.session.data3 = result[0].wallet_add;
             let aa = await web3.eth.getBalance(req.session.data3);
-            let money1 = await web3.utils.fromWei(String(aa));
-            conn.query(sql2, [money1-1, req.session.data3], (err) =>{
+            let money1 = parseInt(aa/1000000000000000000);
+            conn.query(sql2, [money1, req.session.data3], (err) =>{
                 console.log(err) 
                     let data = {
                         name : req.session.data1,

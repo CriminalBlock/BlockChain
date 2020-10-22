@@ -46,16 +46,16 @@
         <div class="main-header ">
             <div class="header-top top-bg d-none d-lg-block">
                 <div class="container-fluid">
-                    <a href="http://localhost:2000/main_1_in"> <img src="img/로고.png" style="margin-top:2%; " ></a> 
+                    <a href="http://10.10.202.239:2000/main_1_in"> <img src="img/로고.png" style="margin-top:2%; " ></a> 
                     <div class="col-xl-12">
                         <div class="row d-flex justify-content-between align-items-center">
                             <div class="header-info-right" align="right">
                                 <ul>                                          
-                                    <li><a href="http://localhost:2000/main_1">로그아웃</a></li>
+                                    <li><a href="http://10.10.202.239:2000/main_1">로그아웃</a></li>
                                     <li><a href="#">장바구니</a></li>
-                                    <li><a href="http://localhost:2000/customer">고객센터</a></li>
-                                    <li><a href="http://localhost:2000/exchange">환전하기</a></li>
-                                    <li><a href="http://localhost:2000/temp_list">마이페이지</a></li>
+                                    <li><a href="http://10.10.202.239:2000/customer">공지사항</a></li>
+                                    <li><a href="http://10.10.202.239:2000/exchange">환전하기</a></li>
+                                    <li><a href="http://10.10.202.239:2000/temp_list">마이페이지</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
 <div class="container-fluid div_header">
     <header style="text-align: center;">
         <div class="text-center" style="width:60%; display: inline-block; margin-left: 10%;">
-            <!-- <a href="http://localhost:2000/main_1_in"> <img src="img/6cbac97c-3c82-4e86-8314-cb85b900a759.png"></a>             -->
+            <!-- <a href="http://10.10.202.239:2000/main_1_in"> <img src="img/6cbac97c-3c82-4e86-8314-cb85b900a759.png"></a>             -->
         </div>
         <a class="text-right" style="float: right; color: black;">반갑습니다 <%=name%>님! 보유 금액: <%=money%> eth</a>
 
@@ -125,7 +125,7 @@
 </div>
     
     <br>
-    <h1 class="text-center"><i class="fas fa-bullhorn">고객센터</i></h1>
+    <h1 class="text-center"><i class="fas fa-bullhorn">공지사항</i></h1>
     <hr>
     <br>
 
@@ -175,7 +175,7 @@
                 <div>
                     <table>
                         <tr rowspan='2'>
-                            <div style="color: #0b1c39;;"><i class="fab fa-angellist"></i>다있따중고의 추천 영상!</div>
+                            <div style="color: #0b1c39;;"><i class="fab fa-angellist"></i>블록캣의 추천 영상!</div>
                         </tr>
                         <tr>
                             <td><img src="img/mypage1.png" class="img-responsive" style="padding-right: 10px;"></td>
@@ -184,32 +184,47 @@
                     </table>
                 </div>
 
-                <span><br>공지사항 </span> <br><br>
-
                 <div style="padding-left:10%; padding-right: 10%;">
+                    <!-- <span style="text-align: center;"><br>공지사항 </span> <br><br>
+                     
                 <table class="table text-center" >
                     <thead>
                         <tr>
-                            <th class="item" style="font-size: 20px;">거래번호</th>
                             <th class="item" style="font-size: 20px;">제목</th>
+                            <th class="item" style="font-size: 20px;"> 작성자</th>
                         </tr>
-                    </thead>
-                    <!-- <tbody> -->
-                    
-                    <!-- </tbody> -->
-                </table>
-            </div>
-            </div>
-
-                <!--aside-->
-                <div class="col-sm-2 div_aside">
-                    <div class="upload_thing" style="border: 1px solid; border-radius: 25px; border-color: #D7B5EB;">
-                        <p style="text-align: center; font-size: 1.5em; padding-top: 3%;">판매등록</p>
-                        <button type="button" class="btn btn-default btn-block" style="height: 50px; font-size: 2em; " onclick="go_to_sell()">Click</button>
-                    </div>
+                        <tr>
+                            
+                        </tr>
+                    </thead>   
+                </table> -->
+                <h1><br> 블록캣 이용방법</h1>
+                <div>
+                    <p><i class="far fa-hand-point-right"></i> 우리 사이트를 이용하기 위해 회원가입이 필요합니다.</p> 
+                    <b>Why?</b> 단 한 번의 회원가입으로 더이상의 본인인증은 NO!
                 </div>
+                <div>
+                    <p><i class="far fa-hand-point-right"></i> 0.01%의 부담없는 블록캣 수수료 정책  
+                    <br><b>How?</b>2020.10.29기준 1000 KRW = 1  eth
+                  
+                    <br>상품 거래시 아래의 클릭버튼 한 번당 0.005%의 수수료(gas)를 지불합니다. 이는 원화 약 0.05원입니다.
+                    <br>(판매등록시엔 0.1%의 수수료가 부과됩니다.)
+                    </p>
+                    <p><i class="fas fa-exclamation-circle"></i>구매하기, 취소하기, 가격변경, 판매하기, 물품인증, 금액받기, 제시금액확인, 판매등록 </p>
+                </div>
+               
+                </div>
+               
         
             </div>
+                            <!--aside-->
+                            <div class="col-sm-2 div_aside">
+                                <div class="upload_thing" style="border: 1px solid; border-radius: 25px; border-color: #D7B5EB;">
+                                    <p style="text-align: center; font-size: 1.5em; padding-top: 3%;">판매등록</p>
+                                    <button type="button" class="btn btn-default btn-block" style="height: 50px; font-size: 2em; " onclick="go_to_sell()">Click</button>
+                                </div>
+                            </div>
+            
     
         </div>
 

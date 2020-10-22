@@ -124,16 +124,16 @@ p{
         <div class="main-header ">
             <div class="header-top top-bg d-none d-lg-block">
                 <div class="container-fluid">
-                    <a href="http://localhost:2000/main_1_in"> <img src="img/로고.png" style="margin-top:2%; " ></a> 
+                    <a href="http://10.10.202.239:2000/main_1_in"> <img src="img/로고.png" style="margin-top:2%; " ></a> 
                     <div class="col-xl-12">
                         <div class="row d-flex justify-content-between align-items-center">
                             <div class="header-info-right" align="right">
                                 <ul>                                          
-                                    <li><a href="http://localhost:2000/main_1">로그아웃</a></li>
+                                    <li><a href="http://10.10.202.239:2000/main_1">로그아웃</a></li>
                                     <li><a href="#">장바구니</a></li>
-                                    <li><a href="http://localhost:2000/customer">고객센터</a></li>
-                                    <li><a href="http://localhost:2000/exchange">환전하기</a></li>
-                                    <li><a href="http://localhost:2000/temp_list">마이페이지</a></li>
+                                    <li><a href="http://10.10.202.239:2000/customer">공지사항</a></li>
+                                    <li><a href="http://10.10.202.239:2000/exchange">환전하기</a></li>
+                                    <li><a href="http://10.10.202.239:2000/temp_list">마이페이지</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -147,9 +147,16 @@ p{
 <div class="container-fluid div_header">
     <header style="text-align: center;">
         <div class="text-center" style="width:60%; display: inline-block; margin-left: 10%;">
-            <!-- <a href="localhost:2000/main_1_in"> <img src="img/6cbac97c-3c82-4e86-8314-cb85b900a759.png"></a> -->
+            <!-- <a href="10.10.202.239:2000/main_1_in"> <img src="img/6cbac97c-3c82-4e86-8314-cb85b900a759.png"></a> -->
         </div>
-        <a class="text-right" style="float: right; color: black;">반갑습니다 <%=name%>님! 보유 금액:<%=money%> eth</a>
+        <a class="text-right" style="float: right; color: black;">반갑습니다 <%=name%>님! 보유 금액: <%=money%> 
+        <%# if(money == "-1" ){ %>
+            <%#=money+1%>
+        <%# }else{ %>
+            <%#=money%>
+        <%# } %>
+        eth
+        </a>
 
     </header>
 
@@ -263,7 +270,7 @@ p{
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                       <div class="item active">
-                        <img src="img/f2a48714-52b5-44e6-88e4-b63b7ae44f20.png" width="100%" height="300px" alt="...">
+                        <img src="img/main_banner.png" width="100%" height="300px" alt="...">
                         <div class="carousel-caption">
                         </div>
                       </div>
@@ -295,8 +302,9 @@ p{
 
          
   <!-- ======================================================== -->
-                <div class="frame_of_table">            <!--사진노출 table-->
+                <div class="frame_of_table text-center">            <!--사진노출 table-->
                     <ul style="list-style: none;">
+                        <img class="img-responsive" src="img/exchange_1.png" style="width: 1200px; height: 100%;">
                         <li class="col4" style="width: 100%; height: auto;">                            
                             <!-- ======================================================== -->
                             <div class="wrapper" style="margin: 0px 10px;">
@@ -321,6 +329,36 @@ p{
                             <!-- =================================================================== -->
                         </li>
                     </ul>
+
+                    <br>
+                    <table class="table" style="text-align: left;">
+                        <tr>
+                            <td style="color:cornflowerblue; text-align: left;">eth 충전 안내</td>
+                        </tr>
+                        <tr>
+                            <td><li style="color:dodgerblue">전용계좌 </li>
+                            <ul style="font-size: 25px;">고객님의 입금편의를 위해 전용 입금 계좌를 제공하고 있으며 계좌 발급 후 입금하시면 eth로 충전됩니다.</ul></td>
+                        </tr>
+                        <tr>
+                            <td><li style="color:dodgerblue;">자동이체(실시간 계좌 이체) </li>
+                                <ul style="font-size: 25px;">고객님의 은행계좌에서 계좌정보 및 공인인증서 확인 후 바로 eth로 충전 가능합니다.</ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><li style="color:dodgerblue;">상품권 충전 </li>
+                                <ul style="font-size: 25px;">문화상품권, 스마트문화상품권, 도서문화, 해피머니 상품권으로 eth를 충전하실 수 있습니다.</ul></td>
+                        </tr>
+                        <tr>
+                            <td><li style="color:dodgerblue;">선불카드 충전 </li>
+                                <ul style="font-size: 25px;">편의점 또는 문구점에서 판매되는 틴캐시, 에그머니, GP쿠폰 등으로 eth를 충전하실 수 있습니다.</ul></td>
+                        </tr>
+                        <tr>
+                            <td><li style="color:dodgerblue;">블록캣 전용 충전 </li>
+                                <ul style="font-size: 25px;">블록캣 마일리지 이용권, eth상품권 등 블록캣과 제휴가 맺어진 상품권으로 마일리지를 충전하실 수 있습니다.</ul></td>
+                        </tr>
+
+                    </table>
+        
                 </div>
             </div>
     

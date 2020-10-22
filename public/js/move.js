@@ -1,32 +1,29 @@
 function go_to_sell() {
-    location="http://localhost:2000/post_thing";
+    location="http://10.10.202.239:2000/post_thing";
 }
 
-function temp_save() {
-    location="http://localhost:5500/9.html";
-}
 
 function not_login() {
     alert("로그인을 해주십시오.");
-    location="http://localhost:2000/main_login";
+    location="http://10.10.202.239:2000/main_login";
 }
 
 function myBtn_1(x) {
-    window.location="http://localhost:2000/category_1?id="+document.getElementById(x).getAttribute('value');
+    window.location="http://10.10.202.239:2000/category_1?id="+document.getElementById(x).getAttribute('value');
 }
    
 function sign_up(){
-    location="http://localhost:2000/sign_up";
+    location="http://10.10.202.239:2000/sign_up";
 }
 
 function go_get_money_seller(x){
     let tar = x.getAttribute('num');
-    location="http://localhost:2000/get_money_seller?tar="+tar;
+    location="http://10.10.202.239:2000/get_money_seller?tar="+tar;
 }
 
 function go_get_money_buyer(x){
     let tar = x.getAttribute('num');
-    location="http://localhost:2000/get_money_buyer?tar="+tar;
+    location="http://10.10.202.239:2000/get_money_buyer?tar="+tar;
 }
 
 function posted_front(){
@@ -86,14 +83,14 @@ function move_detailpage(clicked_id){
     if(clicked_id=='no_product'){
         console.log(clicked_id)        
     }else{
-        location="http://localhost:2000/main_detail?tar="+clicked_id;
+        location="http://10.10.202.239:2000/main_detail?tar="+clicked_id;
     }
 
 }
 
 function go_to_rewrite(x){
     
-    location="http://localhost:2000/post_thing_rewrite?tar="+x.substring(2,);
+    location="http://10.10.202.239:2000/post_thing_rewrite?tar="+x.substring(2,);
 }
 var xhttp = new XMLHttpRequest();
     xhttp.responseType = 'json';
@@ -171,7 +168,9 @@ function click_buy(x){
     if(coin_offer>=limit){
         xhttp.onreadystatechange=function(){
             if(this.readyState ==4 &&(this.status ==200 || this.status == 201)){
-                click.outerHTML = "구매요청이 완료되었습니다. 약간의 시간이 소요됩니다.";
+                document.getElementById('coin_offer').outerHTML = "구매요청이 완료되었습니다. 약간의 시간이 소요됩니다."
+                document.getElementById('eth').outerHTML = "";
+                click.outerHTML = "";
             }
         }
     
@@ -240,7 +239,7 @@ function offer_again(){
     let tar = document.getElementsByName('coin_offer')[0].getAttribute('num');
     let coin_offer = document.getElementsByName('coin_offer')[0].value;
     if(coin_offer>=limit){
-        location="http://localhost:2000/offer_again?tar="+tar+"&coin_offer="+coin_offer;
+        location="http://10.10.202.239:2000/offer_again?tar="+tar+"&coin_offer="+coin_offer;
     }else{
         alert("최소 거래 가능 금액보다 적습니다.")
     }
@@ -250,7 +249,7 @@ function offer_again(){
 function offer_cancel(){
     let tar = document.getElementsByName('coin_offer')[0].getAttribute('num');
     let coin_offer = document.getElementsByName('coin_offer')[0].value;
-    location="http://localhost:2000/offer_cancel?tar="+tar+"&coin_offer="+coin_offer;
+    location="http://10.10.202.239:2000/offer_cancel?tar="+tar+"&coin_offer="+coin_offer;
 }
 
 function get_ether(){
@@ -258,6 +257,6 @@ function get_ether(){
     let coin = document.getElementById('expected_eth').innerText;
     if(x){
         alert("코인이 들어오기까지 수 분정도 소요됩니다.")
-        location="http://localhost:2000/exchanging?value="+coin;
+        location="http://10.10.202.239:2000/exchanging?value="+coin;
     }
 }
