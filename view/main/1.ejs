@@ -125,15 +125,15 @@ p{
         <div class="main-header ">
             <div class="header-top top-bg d-none d-lg-block">
                 <div class="container-fluid">
-                    <a href="http://10.10.202.239:2000/main_1"> <img src="img/로고.png" style="margin-top:2%; " ></a> 
+                    <a href="http://192.168.0.105:2000/main_1"> <img src="img/로고.png" style="margin-top:2%; " ></a> 
                     <div class="col-xl-12">
                         <div class="row d-flex justify-content-between align-items-center">
                             <div class="header-info-right" align="right">
                                 <ul>                                          
-                                    <li><a href="http://10.10.202.239:2000/main_login">로그인</a></li>
+                                    <li><a href="http://192.168.0.105:2000/main_login">로그인</a></li>
                                     <li><a href="#">장바구니</a></li>
-                                    <li><a href="http://10.10.202.239:2000/customer">공지사항</a></li>
-                                    <li><a href="http://10.10.202.239:2000/main_login">마이페이지</a></li>
+                                    <li><a href="http://192.168.0.105:2000/customer">공지사항</a></li>
+                                    <li><a href="http://192.168.0.105:2000/main_login">마이페이지</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -147,7 +147,7 @@ p{
     <div class="container-fluid div_header">
         <header style="text-align: center;">
             <div class="text-center" style="width:60%; display: inline-block;">
-                <!-- <a href="http://10.10.202.239:2000/main_1"> <img src="img/로고.png"></a>             -->
+                <!-- <a href="http://192.168.0.105:2000/main_1"> <img src="img/로고.png"></a>             -->
             </div>
             <div style="text-align: right; display: inline-block; padding-top: 3%;">
             </div>
@@ -269,14 +269,14 @@ p{
                     </div>
                   </div>
                   <div class="item">
-                    <a href="http://10.10.202.239:2000/exchange">
+                    <a href="http://192.168.0.105:2000/exchange">
                         <img src="img/main_banner1.png" alt="...">
                     </a>
                     <div class="carousel-caption">
                     </div>
                   </div>
                   <div class="item">
-                    <a href="http://10.10.202.239:2000/customer">
+                    <a href="http://192.168.0.105:2000/customer">
                         <img src="img/main_banner2.png" alt="...">
                     </a>
                     <div class="carousel-caption">
@@ -311,9 +311,11 @@ p{
                                         <div class="img_section2" style="overflow: hidden;">
                                             <div class="product_img text-center" style="width: 100%; height: 230px; padding-left: 30px;">
                                                 <% if(typeof result[i]=="undefined"){ %>
-                                                    <%= noimg %>
-                                                <% }else{ %> 
+                                                <%= noimg %>
+                                                <% } else if(result[i].time_limit == null){ %>
                                                     <img src="/img/upload/<%= result[i].post_picname_front %>jpg" class="img-fluid img-responsive" id="image_name<%=i%>" width="230px" height="230px" style="max-width: 100%; height: 100%;" alt="no image">
+                                                <% }else{ %> 
+                                                    <img src="/img/upload/<%= result[i].post_picname_front %>jpg" class="img-fluid img-responsive" id="image_name<%=i%>" width="230px" height="230px" style="max-width: 100%; height: 100%; opacity: 0.4; filter:grayscale(70%)" alt="no image">
                                                 <% } %> 
                                             </div>
                                         </div>

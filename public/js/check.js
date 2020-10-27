@@ -2,14 +2,14 @@
 function check1(){
     var name = document.getElementsByName("id");
     console.log(name[0].value);
-    location="http://10.10.202.239:2000/newacc_correct?"+"id="+name[0].value;
+    location="http://192.168.0.105:2000/newacc_correct?"+"id="+name[0].value;
 };
 
 function check2(){
-    location="http://10.10.202.239:2000/al3?num=1";
+    location="http://192.168.0.105:2000/al3?num=1";
 };
 function check3(){
-    location="http://10.10.202.239:2000/admin_user?num=1";
+    location="http://192.168.0.105:2000/admin_user?num=1";
 };
 
 var xhttp = new XMLHttpRequest();

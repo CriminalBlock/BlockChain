@@ -16,7 +16,7 @@ const { stringify } = require("querystring");
 let conn_info = {
     host : 'localhost',
     port : 3320,
-    user : 'root',
+    user : 'jay',
     password : '1234',
     database : 'mydb'
 };
@@ -80,7 +80,7 @@ module.exports = function(app) {
         req.session.data2 = undefined;                      //비밀번호 담을 곳
         req.session.data3 = undefined;                      //지갑주소 담을 곳
         let conn = mysql.createConnection(conn_info)
-        var sql = "select trans_num, post_picname_front, post_picname_side, post_picname_back, post_title, post_price_max from post where determinant = 1"
+        var sql = "select trans_num, post_picname_front, post_picname_side, post_picname_back, post_title, post_price_max, time_limit from post where determinant = 1"
         conn.query(sql, (err, result)=>{
             var data = {
                 result : result,
@@ -139,6 +139,7 @@ module.exports = function(app) {
     })
 
     app.post('/main_1_in',parser, function(req,res){
+        try{
         let conn = mysql.createConnection(conn_info);
         let sql1 = "select user_id, password, wallet_value, wallet_add from guest where user_id = ?";
         console.log(req.session.data1);
@@ -164,11 +165,11 @@ module.exports = function(app) {
                     req.session.data3 = result[0].wallet_add;
                     web3.eth.personal.unlockAccount(result[0].wallet_add, result[0].password, 600);
                     let conn = mysql.createConnection(conn_info)
-                    var sql = "select trans_num, post_picname_front, post_title, post_price_max from post where determinant = 1"
+                    var sql = "select trans_num, post_picname_front, post_title, post_price_max, time_limit from post where determinant = 1"
                     conn.query(sql, (err, result1)=>{
                         result1.reverse();       //result를 reverse해서 가장 최신게시글이 자동으로 result[0]이 돼서 화면에 뿌려주는 코드            
                         var render_data = {
-                            money : result[0].wallet_value,
+                            money : result[0].wallet_value.substring(0,result[0].wallet_value.length-6),
                             name : result[0].user_id,
                             result : result1,
                             noproduct : '등록된 상품이 없습니다',
@@ -178,18 +179,22 @@ module.exports = function(app) {
                         res.render('./main/1_in.ejs',render_data);      //로그인 했을 때: main/1_in
                     })
                     let aa = await web3.eth.getBalance(req.session.data3);
-                    let money1 = parseInt(aa/1000000000000000000);
+                    // let money1 = parseInt(aa/1000000000000000000);
+                    let money1 = aa/1000000000000000000;
                     let sql2 = "update guest set wallet_value = ? where user_id = ?";
                     conn.query(sql2, [money1, req.session.data1], (err)=>{
                         console.log(err)
                     })
                 }
             };
-        });
-        
-    })
-
+    ``    })
+        }catch(error){
+            console.log(error)
+        }
+    });
+``
     app.get("/main_1_in", function(req,res){
+        try{
         let conn = mysql.createConnection(conn_info);
         let sql1 = "select user_id, password, wallet_value, wallet_add from guest where user_id = ?";
         conn.query(sql1,req.session.data1, async (err,result)=>{
@@ -207,11 +212,11 @@ module.exports = function(app) {
                     req.session.data3 = result[0].wallet_add;
                     web3.eth.personal.unlockAccount(result[0].wallet_add, result[0].password, 600);
                     let conn = mysql.createConnection(conn_info)
-                    var sql = "select trans_num, post_picname_front, post_title, post_price_max from post where determinant = 1"
+                    var sql = "select trans_num, post_picname_front, post_title, post_price_max,time_limit from post where determinant = 1"
                     conn.query(sql, (err, result1)=>{
                         result1.reverse();       //result를 reverse해서 가장 최신게시글이 자동으로 result[0]이 돼서 화면에 뿌려주는 코드            
                         var render_data = {
-                            money : result[0].wallet_value,
+                            money : result[0].wallet_value.substring(0,result[0].wallet_value.length-6),
                             name : result[0].user_id,
                             result : result1,
                             noproduct : '등록된 상품이 없습니다',
@@ -221,7 +226,8 @@ module.exports = function(app) {
                         res.render('./main/1_in.ejs',render_data);      //로그인 했을 때: main/1_in
                     })
                     let aa = await web3.eth.getBalance(req.session.data3);
-                    let money1 = parseInt(aa/1000000000000000000);
+                    // let money1 = parseInt(aa/1000000000000000000);
+                    let money1 = aa/1000000000000000000;
                     let sql2 = "update guest set wallet_value = ? where user_id = ?";
                     conn.query(sql2, [money1, req.session.data1], (err)=>{
                         console.log(err)
@@ -230,7 +236,9 @@ module.exports = function(app) {
                 }
             };
         });
-        
+    }catch(error){
+        console.log(error)
+    }
     })
 
     app.get('/post_thing', function(req,res){           //물품 등록
@@ -258,6 +266,7 @@ module.exports = function(app) {
     })
 
     app.get('/post_thing_rewrite', function(req,res){           //임시 저장 수정 시
+        try{
         let conn = mysql.createConnection(conn_info);
         var sql = "select trans_num, post_picname_front, post_picname_side, post_picname_back, post_category, post_detail_category, post_title, post_price_min, post_price_max, post_content from post where trans_num = ?";
         conn.query(sql, req.query.tar, (err, result)=>{
@@ -274,7 +283,9 @@ module.exports = function(app) {
             })
             
         })
-        
+    }catch(error){
+        console.log(error)
+    }
     });
 
     app.get('/check_site',function(req,res){                    // 임시 저장에서 게시물 등록 시 필요한 요소가 있나 체크하는 곳
@@ -308,6 +319,7 @@ module.exports = function(app) {
 
     //임시저장
     app.post('/post_thing/temp_save',parser, function(req,res){
+        try{
         
         var array_check = [req.body.pic_front,req.body.pic_side,req.body.pic_back];
 
@@ -452,7 +464,10 @@ module.exports = function(app) {
             }
         });
 
-        res.redirect("/temp_list");        
+        res.redirect("/temp_list");   
+    }catch(error){
+        console.log(error)
+    }     
     });
 
     app.post('/post_thing/temp_save_update',parser, function(req,res){                          //임시저장에서 다시 임시저장
@@ -621,6 +636,7 @@ module.exports = function(app) {
 
 
     app.get('/temp_list', function(req,res){
+        try{
         let conn = mysql.createConnection(conn_info);
         var sql = 'select * from post where determinant = 0 and user_id = ? ';
         var sql1 =  'select user_id, wallet_add, wallet_value, wallet_status from guest where user_id = ?';
@@ -631,12 +647,13 @@ module.exports = function(app) {
             conn.query(sql1, req.session.data1, async (err,result1)=>{
                 req.session.data3 = result1[0].wallet_add;
                 let aa = await web3.eth.getBalance(req.session.data3);
-                let money1 = parseInt(aa/1000000000000000000);
+                // let money1 = parseInt(aa/1000000000000000000);
+                let money1 = aa/1000000000000000000;
                 conn.query(sql2, [money1, req.session.data1], (err)=> {
                     console.log(err)
                         let render_data = {
                             name : req.session.data1,
-                            money : result1[0].wallet_value,
+                            money : result1[0].wallet_value.substring(0,result1[0].wallet_value.length-6),
                             result : result,
                             result1 : result1
                     }
@@ -644,6 +661,9 @@ module.exports = function(app) {
                 });
             })
         });
+    }catch(error){
+        console.log(error)
+    }
     });
 //=========================================================================
     //저장
@@ -653,7 +673,7 @@ module.exports = function(app) {
             let MyContract = new web3.eth.Contract(abi);
             let deploy = MyContract.deploy({
                 data: '0x'+bytecode,
-                arguments: [req.body.price[0],ethers.utils.formatBytes32String(req.body.auth_code),'0xe594e2aff848fdf8cae7c4654f55086a6a650331']                // constructor에 저장되는 값들 여기서는 물건 가격과 인증 코드가 해당된다.
+                arguments: [req.body.price[0],ethers.utils.formatBytes32String(req.body.auth_code),'0xb1d1a708f56e1cc380755e48abd622535913ee7e']                // constructor에 저장되는 값들 여기서는 물건 가격과 인증 코드가 해당된다.
                 }).encodeABI();
             let con_addr;
             let sql = 'update post set post_contract_address = ? where post_detail_category = ? and post_price_min = ? and user_id =? and post_picname_front = ?';
@@ -732,7 +752,7 @@ module.exports = function(app) {
         let MyContract = new web3.eth.Contract(abi);
         let deploy = MyContract.deploy({
             data: '0x'+bytecode,
-            arguments: [req.body.price[0],ethers.utils.formatBytes32String(req.body.auth_code),'0xe594e2aff848fdf8cae7c4654f55086a6a650331']                // constructor에 저장되는 값들 여기서는 물건 가격과 인증 코드가 해당된다.
+            arguments: [req.body.price[0],ethers.utils.formatBytes32String(req.body.auth_code),'0xb1d1a708f56e1cc380755e48abd622535913ee7e']                // constructor에 저장되는 값들 여기서는 물건 가격과 인증 코드가 해당된다.
             }).encodeABI();
         let con_addr;
 
@@ -938,8 +958,9 @@ module.exports = function(app) {
 
 
     app.get("/main_1_in", function(req,res){
+        try{
         let conn = mysql.createConnection(conn_info)
-        var sql = "select trans_num, post_picname_front, post_title, post_price_max from post where determinant = 1"
+        var sql = "select trans_num, post_picname_front, post_title, post_price_max, time_limit from post where determinant = 1"
         conn.query(sql, (err, result)=>{
             result.reverse();       //result를 reverse해서 가장 최신게시글이 자동으로 result[0]이 돼서 화면에 뿌려주는 코드            
             var render_data = {
@@ -951,6 +972,9 @@ module.exports = function(app) {
                 }
             res.render('./main/1_in.ejs',render_data);      //로그인 했을 때: main/1_in
                     })
+        }catch(error){
+            console.log(error)
+        }
     })
 
     app.get('/temp_detail', function(req,res){
@@ -978,9 +1002,23 @@ module.exports = function(app) {
         let conn = mysql.createConnection(conn_info)
         let sql = 'select post_fixed_buyer, time_limit, post_buyer, trans_num, user_id, post_title, post_content, post_price_min, post_price_max, post_picname_front, post_picname_side, post_picname_back, auth_buyer, auth_seller from post where trans_num = ? and determinant = 1';
         var sql1 =  'select user_id, wallet_add, wallet_value, wallet_status from guest where user_id = ?';
-
-        conn.query(sql, req.query.tar, async (err, result)=>{
+        
+            conn.query(sql, req.query.tar, async (err, result)=>{
             console.log(result);
+            if(req.session.data1 == undefined){
+                var data = {
+                    title : result[0].post_title,
+                    content : result[0].post_content,
+                    price_min : result[0].post_price_min,
+                    price_max : result[0].post_price_max,
+                    img_front : result[0].post_picname_front,
+                    img_side : result[0].post_picname_side,
+                    img_back : result[0].post_picname_back,
+                    seller_name : result[0].user_id,
+                    num : result[0].trans_num                                 // 구매자 id가 구매자 페이지로도 넘어가므로 추후 보안 문제 발생의 우려가 있음
+                }
+                res.render('./main/14_not_login.ejs', data);
+            }else{       
             conn.query(sql1, req.session.data1, (err,result1)=>{
                 req.session.data3 = result1[0].wallet_add;
                 var x = result[0].post_buyer.split(',');        // 문자열 오류로 인해 조건식으로 상황 구분
@@ -997,9 +1035,10 @@ module.exports = function(app) {
                     img_front : result[0].post_picname_front,
                     img_side : result[0].post_picname_side,
                     img_back : result[0].post_picname_back,
+                    seller_name : result[0].user_id,
                     name : result1[0].user_id,
                     num : result[0].trans_num,
-                    money : result1[0].wallet_value,
+                    money : result1[0].wallet_value.substring(0,result1[0].wallet_value.length-6),
                     buyer : y                                 // 구매자 id가 구매자 페이지로도 넘어가므로 추후 보안 문제 발생의 우려가 있음
                 }
                 console.log(result[0].post_fixed_buyer)
@@ -1026,11 +1065,7 @@ module.exports = function(app) {
                 }
                 var array_check = [first,second,third,fourth];
 
-                if(req.session.data1 == undefined){
-                        
-                        res.render('./main/14_not_login.ejs', data);       
-                    
-                }else{
+            
                     let now = Date.now();
                     let limit = new Date(result[0].time_limit).getTime();
                     switch(array_check.join()){
@@ -1083,16 +1118,20 @@ module.exports = function(app) {
                     }
                      
                         res.render('./main/14'+z,data);
-                    }
+                
             
             }) // 두번쨰 쿼리문 닫기
+            
             let aa = await web3.eth.getBalance(req.session.data3);
-            let money1 = parseInt(aa/1000000000000000000);
+            // let money1 = parseInt(aa/1000000000000000000);
+            let money1 = aa/1000000000000000000;
             let sql2 = "update guest set wallet_value = ? where user_id = ?";
             conn.query(sql2, [money1, req.session.data1], (err)=>{
                 console.log(err)
             })
+        }
         })      //첫번째 쿼리문 닫기
+    
     });     
     //===============================================================
 
@@ -1169,7 +1208,7 @@ module.exports = function(app) {
         var conn = mysql.createConnection(conn_info);
         // var sql1 = "SELECT large_women FROM category WHERE large_women IN (SELECT large_women FROM category WHERE large_id = 1);";
         var sql = 'SELECT '+req.query.id+' as name FROM category where not '+req.query.id+' is null';
-        var sql1 = 'select trans_num, post_picname_front, post_picname_side, post_picname_back, post_title, post_price_max from post where determinant = 1 and post_category=?';
+        var sql1 = 'select trans_num, post_picname_front, post_picname_side, post_picname_back, post_title, post_price_max from post where determinant = 1 and post_category=? collate utf8_general_ci';
         conn.query(sql, function(err, result){
             conn.query(sql1, req.query.id, function(err,result1){
                 if (err) {
@@ -1933,6 +1972,7 @@ module.exports = function(app) {
     })
 
     app.get('/exchange',async function(req,res){
+        try{
         let conn = mysql.createConnection(conn_info);
         let sql = 'select user_id,wallet_add,wallet_value, wallet_status from guest where user_id = ?';
         let sql2 = "update guest set wallet_value = ? where user_id = ?";
@@ -1944,18 +1984,22 @@ module.exports = function(app) {
             }else{
                 let data = {
                     name : req.session.data1,
-                    money : result[0].wallet_value
+                    money : result[0].wallet_value.substring(0,result[0].wallet_value.length-6)
                 }
                 res.render('./main/exchange.ejs',data);
             }
         })
         let aa = await web3.eth.getBalance(req.session.data3);
         console.log('aa:', aa)
-        let money1 = parseInt(aa/1000000000000000000);
+        // let money1 = parseInt(aa/1000000000000000000);
+        let money1 = aa/1000000000000000000;
         console.log('money1:',money1)
         conn.query(sql2, [money1, req.session.data1], (err) =>{
             console.log(err) 
         })
+    }catch(error){
+        console.log(error)
+    }
    
     
 });
@@ -1966,15 +2010,16 @@ module.exports = function(app) {
     app.get('/exchanging', async function(req,res){
         let conn = mysql.createConnection(conn_info);
         res.redirect("/main_1_in");
-        await web3.eth.personal.unlockAccount('0xe594e2aff848fdf8cae7c4654f55086a6a650331', 'pass0', 600);
+        await web3.eth.personal.unlockAccount('0xb1d1a708f56e1cc380755e48abd622535913ee7e', '0000', 600);
         console.log(req.query.coin)
-        let contract = new web3.eth.Contract(exchange_abi, '0xdC3077D3B5eE2b6130aae173002e1663bc44Eab2');
+        let contract = new web3.eth.Contract(exchange_abi, '0x02f6547a966705D9D7ad9344b22A85c596192F92');
         await contract.methods.Execution(req.session.data3).send({
-            from: '0xe594e2aff848fdf8cae7c4654f55086a6a650331',
+            from: '0xb1d1a708f56e1cc380755e48abd622535913ee7e',
             value: req.query.value*1000000000000000000
         })
         let aa = await web3.eth.getBalance(req.session.data3);
-        let money1 = parseInt(aa/1000000000000000000);
+        // let money1 = parseInt(aa/1000000000000000000);
+        let money1 = aa/1000000000000000000;
         let sql2 = "update guest set wallet_value = ? where user_id = ?";
         conn.query(sql2, [money1, req.session.data1], (err)=>{
             console.log(err)
@@ -2033,12 +2078,13 @@ module.exports = function(app) {
         conn.query(sql, req.session.data1, async (err,result)=>{
             req.session.data3 = result[0].wallet_add;
             let aa = await web3.eth.getBalance(req.session.data3);
-            let money1 = parseInt(aa/1000000000000000000);
+            // let money1 = parseInt(aa/1000000000000000000);
+            let money1 = aa/1000000000000000000;
             conn.query(sql2, [money1, req.session.data3], (err) =>{
                 console.log(err) 
                     let data = {
                         name : req.session.data1,
-                        money : result[0].wallet_value
+                        money : result[0].wallet_value.substring(0,result[0].wallet_value.length-6)
                     }
                     res.render('./main/customer.ejs',data);
             });
