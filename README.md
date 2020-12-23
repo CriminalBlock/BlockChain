@@ -52,6 +52,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 ![사용자 메인 페이지](https://github.com/CriminalBlock/semi-final/git_image/main.png)
+![main](https://user-images.githubusercontent.com/68729868/102982462-e4e5dd00-454d-11eb-829c-6fdebcc5ece7.png)
 
 스마트 컨트랙트를 활용한 블록체인 기반 중고거래 웹 페이지입니다.
 
