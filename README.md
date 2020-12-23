@@ -33,7 +33,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#install">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -50,10 +50,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-![사용자 메인 페이지](https://github.com/CriminalBlock/semi-final/git_image/main.png)
+* 사용자 메인 페이지 / user main page
 ![main](https://user-images.githubusercontent.com/68729868/102982462-e4e5dd00-454d-11eb-829c-6fdebcc5ece7.png)
 
+* 관리자 메인 페이지 / manager main page
+
+
+This is a used market web page utilized blockchain-based smart contracts.   
 스마트 컨트랙트를 활용한 블록체인 기반 중고거래 웹 페이지입니다.
 
 <!--Here's why:
@@ -63,9 +66,8 @@
 
 
 
-### Built With
+## Built With
 ***
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 * [Bootstrap](https://getbootstrap.com)
 * [JQuery](https://jquery.com)
 * [Node.js](https://nodejs.org/ko)
@@ -77,14 +79,16 @@ This section should list any major frameworks that you built your project using.
 
 
 <!-- GETTING STARTED -->
-## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
+* express.js version < 4   
+* download Node.js   
+* download GETH   
 
-This is an example of how to list things you need to use the software and how to install them.
+
+### Install
+
 * npm
   ```
   npm install ejs
@@ -95,10 +99,33 @@ This is an example of how to list things you need to use the software and how to
   ```
   npm install express
   ```
-  ```sh
-  npm install web3
   ```
+  npm install web3
+  
+  ```
+  
+## Getting Started
 
+1. Start to Geth and attach to RPC Client (It depends on your GETH settings)
+  ```
+  geth --networkid 4386 --nodiscover --maxpeers 0 --datadir "C:\ether1" --rpc --rpcapi "eth,web3,miner,admin,personal,net" --rpccorsdomain "*" --allow-insecure-unlock --mine --minerthreads 1 --etherbase 1
+  ```
+  ```
+  geth attach rpc:http://localhost:8545
+  ```
+  
+2. Start to mining
+  ```
+  miner.start(1)
+  ```
+  
+3. Start to Server
+  ```
+  node main.js
+  ```
+  
+4. You can access to 'Blocket'   
+* url: http://www.ipaddress:2000/main
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -108,39 +135,11 @@ Use this space to show useful examples of how a project can be used. Additional 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
 
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
 <!-- CONTACT -->
 ## Contact
 
-Yuna Song - yuna1370@gmaile.com
-Jongwon Yun - [@your_twitter](https://twitter.com/your_username) - email@youremail.com
+Yuna Song - yuna1370@gmaile.com   
+Jongwon Yun - [@your_twitter](https://twitter.com/your_username) - email@youremail.com   
 Boseon Lee - 
 
 Project Link: [https://github.com/CriminalBlock/semi-final](https://github.com/CriminalBlock/semi-final)
@@ -163,22 +162,3 @@ Project Link: [https://github.com/CriminalBlock/semi-final](https://github.com/C
 -->
 * [Font Awesome](https://fontawesome.com)
 
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
