@@ -1,4 +1,4 @@
-# semi-final
+# Blocket
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -50,15 +50,16 @@
 This is a used market web page utilized blockchain-based smart contracts.   
 스마트 컨트랙트를 활용한 블록체인 기반 중고거래 웹 페이지입니다.
 
-* 사용자 메인 페이지 / user main page
+* 사용자 메인 페이지 / user main page   
 ![main](https://user-images.githubusercontent.com/68729868/102982462-e4e5dd00-454d-11eb-829c-6fdebcc5ece7.png)
 
-* 관리자 메인 페이지 / manager main page
+* 관리자 메인 페이지 / manager main page   
 ![manager_main](https://user-images.githubusercontent.com/68729868/102987739-25e1ef80-4556-11eb-9ed6-1f6b1f5e59c7.png)
+![manager_main2](https://user-images.githubusercontent.com/68729868/102988128-ce904f00-4556-11eb-9ab0-4208bbebab03.PNG)
+
 
 
 ## Built With
-***
 * [Bootstrap](https://getbootstrap.com)
 * [JQuery](https://jquery.com)
 * [Node.js](https://nodejs.org/ko)
@@ -130,22 +131,4 @@ Jongwon Yun - [@your_twitter](https://twitter.com/your_username) - email@yourema
 Boseon Lee -    
 
 Project Link: [https://github.com/CriminalBlock/semi-final](https://github.com/CriminalBlock/semi-final)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-<!--
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
--->
-* [Font Awesome](https://fontawesome.com)
 
