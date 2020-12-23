@@ -33,13 +33,10 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#install">Installation</a></li>
+        <li><a href="#install">Install</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
@@ -50,20 +47,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+This is a used market web page utilized blockchain-based smart contracts.   
+스마트 컨트랙트를 활용한 블록체인 기반 중고거래 웹 페이지입니다.
+
 * 사용자 메인 페이지 / user main page
 ![main](https://user-images.githubusercontent.com/68729868/102982462-e4e5dd00-454d-11eb-829c-6fdebcc5ece7.png)
 
 * 관리자 메인 페이지 / manager main page
-
-
-This is a used market web page utilized blockchain-based smart contracts.   
-스마트 컨트랙트를 활용한 블록체인 기반 중고거래 웹 페이지입니다.
-
-<!--Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile: -->
-
+![manager_main](https://user-images.githubusercontent.com/68729868/102987739-25e1ef80-4556-11eb-9ed6-1f6b1f5e59c7.png)
 
 
 ## Built With
@@ -74,11 +65,6 @@ This is a used market web page utilized blockchain-based smart contracts.
 * [express.js](https://expressjs.com/ko)
 * [Ethereum](https://geth.ethereum.org)
 * [MySQL](https://www.mysql.com)
-
-
-
-
-<!-- GETTING STARTED -->
 
 
 ### Prerequisites
@@ -127,6 +113,7 @@ This is a used market web page utilized blockchain-based smart contracts.
 4. You can access to 'Blocket'   
 * url: http://www.ipaddress:2000/main
 
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -140,7 +127,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 Yuna Song - yuna1370@gmaile.com   
 Jongwon Yun - [@your_twitter](https://twitter.com/your_username) - email@youremail.com   
-Boseon Lee - 
+Boseon Lee -    
 
 Project Link: [https://github.com/CriminalBlock/semi-final](https://github.com/CriminalBlock/semi-final)
 
