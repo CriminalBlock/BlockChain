@@ -59,7 +59,7 @@ This is a used market web page utilized blockchain-based smart contracts.
 
 
 
-## Built With
+## Tool
 * [Bootstrap](https://getbootstrap.com)
 * [JQuery](https://jquery.com)
 * [Node.js](https://nodejs.org/ko)
