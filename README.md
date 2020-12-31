@@ -74,20 +74,20 @@ This is a used market web page utilized blockchain-based smart contracts.
 * download GETH   
 
 
-## Install
+## Installation
 
 * npm
   ```
-  npm install ejs
+  npm install ejs --save
   ```
   ```
-  npm install -g solc
+  npm install solc --save
   ```
   ```
-  npm install express
+  npm install express --save
   ```
   ```
-  npm install web3
+  npm install web3 --save
   
   ```
   
